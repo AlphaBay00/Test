@@ -17,7 +17,7 @@ if success then
 
     -- نافذة البوب أب الترحيبية
     WindUI:Popup({
-        Title = "𝑃ℎ𝑎𝑛𝑡𝑜𝑚𝑋𝑃𝑟𝑜",
+        Title = "PhantomXPro",
         Icon = "crown",
         Content = "⚠️ تنبيه هام:\nتشغيل السكربت يكون على مسؤوليتك الشخصية والكاملة، ونحن غير مسؤولين عن أي ضرر. مع أننا نعمل على تقديم سكربت بأعلى معايير الأمان الممكنة، هذا تحذير احترازي في حال حدوث أي مشكلة غير متوقعة.نتمني لكم تجربة ممتعة ❤",
         Buttons = {
@@ -32,10 +32,10 @@ if success then
 
     -- إنشاء النافذة الرئيسية
     local Window = WindUI:CreateWindow({
-        Title = "𝑃ℎ𝑎𝑛𝑡𝑜𝑚𝑋𝑃𝑟𝑜",
+        Title = "PhantomXPro",
         Icon = "crown", 
-        Author = "𝒀𝒂𝒔𝒔𝒊𝒏",
-        Folder = "𝑃ℎ𝑎𝑛𝑡𝑜𝑚𝑋𝑃𝑟𝑜",
+        Author = "By_Yassin",
+        Folder = "PhantomXPro",
         Size = UDim2.fromOffset(750, 600),
         Theme = "Dark",
         User = {
@@ -1625,7 +1625,7 @@ if success then
     -- =============================================
     do
         Tabs.Credits:Paragraph({
-            Title = "𝑌𝑎𝑠𝑠𝑖𝑛",
+            Title = "By_Yassin",
             Desc = "Roblox Script Developer",
             Image = "user",
             ImageSize = 80,
