@@ -671,9 +671,9 @@ if success then
     -- نظام Auto Join Arena الكامل مع الإصلاحات
     -- =============================================
     local AutoJoinEnabled = false
-    local JoinMode = "Infection"
-    local TargetPlayer = "All"
-    local SelectedArena = "Any"
+    local JoinMode = "عدوى"
+    local TargetPlayer = "الكل"
+    local SelectedArena = "أي ساحة"
     local ShowArenaESP = true
     local arenaESP = nil
     local autoJoinConnection = nil
@@ -892,10 +892,38 @@ if success then
         return false
     end
 
-    local function autoFixPosition(arena, side, slotNum)
-        teleportToWorldSpawn()
-        wait(0.5) 
-        return joinArenaSlot(arena, side, slotNum)
+    local function findEmptyPadInArena(arena, preferredSide)
+        if not arena or not arena:FindFirstChild("Slots") then
+            return nil, nil
+        end
+        
+        -- أولاً ندور على الباد الفاضي في الجانب المفضل
+        if preferredSide and arena.Slots:FindFirstChild(preferredSide) then
+            for i = 1, 4 do
+                local slot = arena.Slots[preferredSide]:FindFirstChild(tostring(i))
+                if slot and slot:FindFirstChild("Data") and slot.Data:FindFirstChild("Player") then
+                    if slot.Data.Player.Value == nil and not isSlotInGame(arena, preferredSide, i) then
+                        return preferredSide, i
+                    end
+                end
+            end
+        end
+        
+        -- إذا ما لقينا في الجانب المفضل، ندور في أي جانب
+        for _, side in pairs({"Left", "Right"}) do
+            if arena.Slots:FindFirstChild(side) then
+                for i = 1, 4 do
+                    local slot = arena.Slots[side]:FindFirstChild(tostring(i))
+                    if slot and slot:FindFirstChild("Data") and slot.Data:FindFirstChild("Player") then
+                        if slot.Data.Player.Value == nil and not isSlotInGame(arena, side, i) then
+                            return side, i
+                        end
+                    end
+                end
+            end
+        end
+        
+        return nil, nil
     end
 
     local function joinArenaSlot(arena, targetSide, targetSlot)
@@ -907,6 +935,7 @@ if success then
         local hull = arena.Slots[targetSide][tostring(targetSlot)].Hull
         local character = player.Character
         if character and character:FindFirstChild("HumanoidRootPart") then
+            -- نروح فوق الباد مباشرة، مو على رأس اللاعب
             character.HumanoidRootPart.CFrame = hull.CFrame + Vector3.new(0, 5, 0)
             
             task.wait(0.3)
@@ -1066,29 +1095,21 @@ if success then
         
         if JoinMode == "عدوى" then
             targetSide = (foundSide == "Left") and "Right" or "Left"
-            targetSlot = foundSlot
+            -- ندور على باد فاضي في الجانب المضاد
+            local emptySide, emptySlot = findEmptyPadInArena(arena, targetSide)
+            if emptySide and emptySlot then
+                return emptySide, emptySlot
+            end
         elseif JoinMode == "فريق" then
             targetSide = foundSide
-            targetSlot = nil
-            
-            for i = 1, 4 do
-                if i ~= foundSlot then
-                    local slot = arena.Slots[targetSide]:FindFirstChild(tostring(i))
-                    if slot and slot:FindFirstChild("Data") and slot.Data:FindFirstChild("Player") then
-                        if slot.Data.Player.Value == nil and not isSlotInGame(arena, targetSide, i) then
-                            targetSlot = i
-                            break
-                        end
-                    end
-                end
-            end
-            
-            if targetSlot == nil then
-                return nil, nil
+            -- ندور على باد فاضي في نفس الجانب
+            local emptySide, emptySlot = findEmptyPadInArena(arena, targetSide)
+            if emptySide and emptySlot then
+                return emptySide, emptySlot
             end
         end
         
-        return targetSide, targetSlot
+        return nil, nil
     end
 
     function isReadyPromptVisible()
@@ -1446,6 +1467,18 @@ if success then
             Size = "xlarge",
             Callback = function(state)
                 toggleAutoFollow(state)
+            end
+        })
+
+        Tabs.Movement:Button({
+            Title = "ارجع زر الأوتو لمكانه",
+            Icon = "refresh-cw",
+            Size = "xlarge",
+            Callback = function()
+                if autoFollowFrame then
+                    autoFollowPosition = UDim2.new(0, 30, 0, 30)
+                    autoFollowFrame.Position = autoFollowPosition
+                end
             end
         })
 
