@@ -17,7 +17,7 @@ if success then
 
     -- نافذة البوب أب الترحيبية
     WindUI:Popup({
-        Title = "PhantomX_Pro",
+        Title = "𝑃ℎ𝑎𝑛𝑡𝑜𝑚𝑋𝑃𝑟𝑜",
         Icon = "crown",
         Content = "⚠️ تنبيه هام:\nتشغيل السكربت يكون على مسؤوليتك الشخصية والكاملة، ونحن غير مسؤولين عن أي ضرر. مع أننا نعمل على تقديم سكربت بأعلى معايير الأمان الممكنة، هذا تحذير احترازي في حال حدوث أي مشكلة غير متوقعة.نتمني لكم تجربة ممتعة ❤",
         Buttons = {
@@ -32,10 +32,10 @@ if success then
 
     -- إنشاء النافذة الرئيسية
     local Window = WindUI:CreateWindow({
-        Title = "PhantomX_Pro",
+        Title = "𝑃ℎ𝑎𝑛𝑡𝑜𝑚𝑋𝑃𝑟𝑜",
         Icon = "crown", 
-        Author = "Yassin",
-        Folder = "PhantomX_Pro",
+        Author = "𝒀𝒂𝒔𝒔𝒊𝒏",
+        Folder = "𝑃ℎ𝑎𝑛𝑡𝑜𝑚𝑋𝑃𝑟𝑜",
         Size = UDim2.fromOffset(750, 600),
         Theme = "Dark",
         User = {
@@ -1252,7 +1252,7 @@ if success then
 
         Tabs.Teleport:Toggle({
             Title = "شغّل الأوتو جوين",
-            Desc = "يدخل لك سيرفر تلقائي",
+            Desc = "يدخلك اي قيم تبيه قبل زحمه الناس ",
             Value = false,
             Size = "xlarge",
             Callback = function(state)
@@ -1390,8 +1390,8 @@ if success then
         })
 
         Tabs.Movement:Toggle({
-            Title = "شغّل السرعة السريعة",
-            Desc = "يزيد سرعة حركتك في اللعبة",
+            Title = "تشغيل السرعة ",
+            Desc = "بيخلي سرعتك اسرع و احسن ",
             Value = false,
             Size = "xlarge",
             Callback = function(state) 
@@ -1420,8 +1420,8 @@ if success then
         })
 
         Tabs.Movement:Toggle({
-            Title = "الطيران المتقدم",
-            Desc = "بيخليك تطير بحرية في الجو",
+            Title = "طيران ",
+            Desc = "بيخلك تطير يظهر للناس ",
             Value = false,
             Size = "xlarge",
             Callback = function(state)
@@ -1448,7 +1448,7 @@ if success then
         })
 
         Tabs.Movement:Button({
-            Title = "أوقف الطيران فوراً",
+            Title = "وقف طيران",
             Icon = "square",
             Size = "xlarge", 
             Callback = function()
@@ -1504,7 +1504,7 @@ if success then
         })
 
         Tabs.Visuals:Toggle({
-            Title = "شغّل الإضاءة الكاملة",
+            Title = "اضائه كاملة",
             Desc = "بيخلي كل الخريطة مضية",
             Value = false,
             Size = "xlarge",
@@ -1524,7 +1524,7 @@ if success then
         })
 
         Tabs.Visuals:Toggle({
-            Title = "شغّل Anti-Lag المتقدم",
+            Title = "مانع الاق ",
             Desc = "بيحسن أداء اللعبة ويزيد السرعة بشكل كبير",
             Value = false,
             Size = "xlarge",
@@ -1557,7 +1557,7 @@ if success then
         })
 
         Tabs.Other:Button({
-            Title = "🎭 سكربت ذا",
+            Title = "سكربت رقصات🎉",
             Desc = "سكربت مميز",
             Icon = "activity",
             Size = "xlarge",
@@ -1625,7 +1625,7 @@ if success then
     -- =============================================
     do
         Tabs.Credits:Paragraph({
-            Title = "Yassin",
+            Title = "𝑌𝑎𝑠𝑠𝑖𝑛",
             Desc = "Roblox Script Developer",
             Image = "user",
             ImageSize = 80,
