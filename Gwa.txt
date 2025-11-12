@@ -140,6 +140,7 @@ if success then
                 startPos.X.Scale, startPos.X.Offset + delta.X,
                 startPos.Y.Scale, startPos.Y.Offset + delta.Y
             )
+            autoFollowPosition = autoFollowFrame.Position
         end
 
         local function beginDrag(input)
@@ -777,7 +778,7 @@ if success then
     end
 
     local function getAllPlayerNames()
-        local players = {"All"}
+        local players = {"الكل"}
         for _, plr in pairs(game.Players:GetPlayers()) do
             if plr ~= player then
                 table.insert(players, plr.Name)
@@ -803,7 +804,7 @@ if success then
             arenaESP = nil
         end
         
-        if SelectedArena == "Any" or not ShowArenaESP then
+        if SelectedArena == "أي ساحة" or not ShowArenaESP then
             return
         end
         
@@ -832,7 +833,7 @@ if success then
         local labelText = Instance.new("TextLabel")
         labelText.Size = UDim2.new(1, 0, 1, 0)
         labelText.BackgroundTransparency = 1
-        labelText.Text = "SELECTED ARENA\n[" .. SelectedArena .. "]"
+        labelText.Text = "الساحة المختارة\n[" .. SelectedArena .. "]"
         labelText.TextColor3 = Color3.fromRGB(255, 255, 0)
         labelText.TextSize = 14
         labelText.Font = Enum.Font.GothamBold
@@ -973,7 +974,7 @@ if success then
     end
 
     function findTargetPlayer(targetName)
-        if targetName == "All" then
+        if targetName == "الكل" then
             return nil
         end
         
@@ -998,7 +999,7 @@ if success then
             local availablePlayers = {}
             
             for _, arena in pairs(workspace.Arenas:GetChildren()) do
-                if SelectedArena ~= "Any" and arena.Name ~= SelectedArena then
+                if SelectedArena ~= "أي ساحة" and arena.Name ~= SelectedArena then
                     continue
                 end
                 
@@ -1016,12 +1017,12 @@ if success then
                                     if plr and plr ~= player and plr.Parent and not isSlotInGame(arena, side, i) then
                                         local hasAvailableSlot = false
                                         
-                                        if JoinMode == "Infection" then
+                                        if JoinMode == "عدوى" then
                                             local oppositeSide = (side == "Left") and "Right" or "Left"
                                             if findFirstAvailableSlot(arena, oppositeSide, nil) then
                                                 hasAvailableSlot = true
                                             end
-                                        elseif JoinMode == "Team" then
+                                        elseif JoinMode == "فريق" then
                                             if findFirstAvailableSlot(arena, side, i) then
                                                 hasAvailableSlot = true
                                             end
@@ -1063,10 +1064,10 @@ if success then
         local targetSide = foundSide
         local targetSlot = foundSlot
         
-        if JoinMode == "Infection" then
+        if JoinMode == "عدوى" then
             targetSide = (foundSide == "Left") and "Right" or "Left"
             targetSlot = foundSlot
-        elseif JoinMode == "Team" then
+        elseif JoinMode == "فريق" then
             targetSide = foundSide
             targetSlot = nil
             
@@ -1161,7 +1162,7 @@ if success then
             end
             
             local foundArena, foundSide, foundSlot, foundPlayer
-            if TargetPlayer == "All" then
+            if TargetPlayer == "الكل" then
                 foundArena, foundSide, foundSlot, foundPlayer = findPlayerInArenas(nil)
             else
                 local targetPlr = findTargetPlayer(TargetPlayer)
@@ -1248,8 +1249,8 @@ if success then
 
         Tabs.Teleport:Dropdown({
             Title = "طريقة الدخول",
-            Values = {"Infection", "Team"},
-            Value = "Infection",
+            Values = {"عدوى", "فريق"},
+            Value = "عدوى",
             Size = "xlarge",
             Callback = function(value)
                 JoinMode = value
@@ -1259,7 +1260,7 @@ if success then
         Tabs.Teleport:Dropdown({
             Title = "اللاعب المستهدف",
             Values = getAllPlayerNames(),
-            Value = "All",
+            Value = "الكل",
             Size = "xlarge",
             Callback = function(value)
                 TargetPlayer = value
@@ -1268,13 +1269,13 @@ if success then
 
         Tabs.Teleport:Dropdown({
             Title = "اختار الساحة",
-            Values = {"Any", "Arena1", "Arena2", "Arena3", "Arena4", "Arena5", "Arena6", "Arena5ICED"},
-            Value = "Any",
+            Values = {"أي ساحة", "Arena1", "Arena2", "Arena3", "Arena4", "Arena5", "Arena6", "Arena5ICED"},
+            Value = "أي ساحة",
             Size = "xlarge",
             Callback = function(value)
                 SelectedArena = value
                 removeArenaESP()
-                if value ~= "Any" then
+                if value ~= "أي ساحة" then
                     createArenaESP()
                 end
             end
@@ -1523,12 +1524,12 @@ if success then
         })
 
         Tabs.Other:Button({
-            Title = "🎭 سكربت رقصات",
-            Desc = "ملاحظة: إذا مت الشخصية الرقصات توقف وتحتاج تشغيلها مرة ثانية",
+            Title = "🎭 سكربت ذا",
+            Desc = "سكربت مميز",
             Icon = "activity",
             Size = "xlarge",
             Callback = function()
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/AlphaBay00/All/main/obf_dtDeyn1voK0Ljc4w2Z2YCN1lIR8hA0LNFuXciw672NCyu69X0UQ5h91hGjOXtXeH.lua.txt"))()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/AlphaBay00/Test/main/obf_3iY3bRN1515L2QvKT67Pa82yV6k1ugbpY4eG7L836S2p341rc49oHEaaJ9r5EnjZ.lua.txt"))()
             end
         })
     end
