@@ -158,9 +158,9 @@ do
     -- خط فاصل
     Tabs.Info:Divider({Title = ""})
 
-    -- زر الانتقال لأفضل سيرفر
+    -- زر البحث عن أفضل سيرفر
     Tabs.Info:Button({
-        Title = "🚀 انتقل لسيرفر أسرع",
+        Title = "🔍 ابحث عن سيرفر سريع",
         Callback = function()
             local TeleportService = game:GetService("TeleportService")
             local HttpService = game:GetService("HttpService")
@@ -168,53 +168,111 @@ do
             WindUI:Notify({
                 Title = "جاري البحث",
                 Content = "بدور على أفضل سيرفر...",
-                Duration = 3
+                Duration = 5
             })
             
-            local function findBestServer()
+            local function findBestServers()
                 local placeId = game.PlaceId
-                local url = "https://games.roblox.com/v1/games/" .. placeId .. "/servers/Public?limit=50"
+                local url = "https://games.roblox.com/v1/games/" .. placeId .. "/servers/Public?limit=100"
                 
                 local success, result = pcall(function()
                     return HttpService:JSONDecode(game:HttpGet(url))
                 end)
                 
                 if success and result.data then
-                    local bestServer = nil
-                    local lowestPing = math.huge
+                    local goodServers = {}
                     
                     for _, server in pairs(result.data) do
-                        if server.playing < server.maxPlayers and server.ping then
-                            if server.ping < lowestPing then
-                                lowestPing = server.ping
-                                bestServer = server
-                            end
+                        -- شروط السيرفر الجيد:
+                        -- بينق أقل من 100
+                        -- لاعبين أقل من 15
+                        -- مو مليان
+                        if server.ping and server.ping < 100 and 
+                           server.playing and server.playing < 15 and
+                           server.playing < server.maxPlayers then
+                           
+                            table.insert(goodServers, {
+                                id = server.id,
+                                ping = server.ping,
+                                playing = server.playing,
+                                maxPlayers = server.maxPlayers
+                            })
                         end
                     end
                     
-                    return bestServer
+                    -- نرتب السيرفرات من الأفضل للأقل
+                    table.sort(goodServers, function(a, b)
+                        return a.ping < b.ping
+                    end)
+                    
+                    return goodServers
                 end
-                return nil
+                return {}
             end
             
-            local bestServer = findBestServer()
-            if bestServer then
-                WindUI:Notify({
-                    Title = "تم العثور على سيرفر",
-                    Content = "بيتقل خلال 3 ثواني...",
-                    Duration = 3
+            local goodServers = findBestServers()
+            
+            if #goodServers > 0 then
+                local bestServer = goodServers[1]  -- أفضل سيرفر
+                
+                -- نعرض معلومات السيرفر ونطلب الموافقة
+                WindUI:Popup({
+                    Title = "🟢 وجدنا سيرفر ممتاز!",
+                    Content = "معلومات السيرفر:\n" ..
+                             "• البينق: " .. bestServer.ping .. " ms\n" ..
+                             "• اللاعبين: " .. bestServer.playing .. "/" .. bestServer.maxPlayers .. "\n\n" ..
+                             "هل تريد الانتقال لهذا السيرفر؟",
+                    Buttons = {
+                        {
+                            Title = "✅ نعم، انتقل",
+                            Icon = "check",
+                            Variant = "Primary",
+                            Callback = function()
+                                WindUI:Notify({
+                                    Title = "جاري الانتقال",
+                                    Content = "بيتقل خلال 3 ثواني...",
+                                    Duration = 3
+                                })
+                                
+                                wait(2)
+                                
+                                pcall(function()
+                                    TeleportService:TeleportToPlaceInstance(game.PlaceId, bestServer.id, player)
+                                end)
+                            end
+                        },
+                        {
+                            Title = "❌ لا، ابقى هنا",
+                            Icon = "x",
+                            Variant = "Secondary", 
+                            Callback = function()
+                                WindUI:Notify({
+                                    Title = "تم الإلغاء",
+                                    Content = "فضلت في السيرفر الحالي",
+                                    Duration = 3
+                                })
+                            end
+                        }
+                    }
                 })
-                
-                wait(2)
-                
-                pcall(function()
-                    TeleportService:TeleportToPlaceInstance(game.PlaceId, bestServer.id, player)
-                end)
             else
-                WindUI:Notify({
-                    Title = "خطأ",
-                    Content = "ما لقينا سيرفر مناسب",
-                    Duration = 3
+                WindUI:Popup({
+                    Title = "🔴 ما لقينا سيرفرات جيدة",
+                    Content = "كل السيرفرات فيها بينق عالي أو مليانة\nجرب مرة ثانية بعد شوي",
+                    Buttons = {
+                        {
+                            Title = "حاول مرة ثانية",
+                            Icon = "refresh-cw",
+                            Callback = function()
+                                -- ممكن تضيف محاولة ثانية هنا
+                            end
+                        },
+                        {
+                            Title = "خلاص",
+                            Icon = "x",
+                            Callback = function() end
+                        }
+                    }
                 })
             end
         end
