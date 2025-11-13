@@ -18,7 +18,7 @@ if success then
 
     -- نافذة البوب أب الترحيبية
     WindUI:Popup({
-        Title = "PhantomX_Pro",
+        Title = "PhantomXPro",
         Icon = "crown",
         Content = "⚠️ تنبيه هام:\nتشغيل السكربت يكون على مسؤوليتك الشخصية والكاملة، ونحن غير مسؤولين عن أي ضرر. مع أننا نعمل على تقديم سكربت بأعلى معايير الأمان الممكنة، هذا تحذير احترازي في حال حدوث أي مشكلة غير متوقعة.نتمني لكم تجربة ممتعة ❤",
         Buttons = {
@@ -33,10 +33,10 @@ if success then
 
     -- إنشاء النافذة الرئيسية
     local Window = WindUI:CreateWindow({
-        Title = "PhantomX_Pro",
+        Title = "PhantomXPro",
         Icon = "crown", 
         Author = "Yassin",
-        Folder = "PhantomX_Pro",
+        Folder = "PhantomXPro",
         Size = UDim2.fromOffset(750, 600),
         Theme = "Dark",
         User = {
