@@ -62,7 +62,7 @@ if success then
 
     -- التبويبات
     local Tabs = {
-        Info = Sections.Main:Tab({ Title = "معلومات", Icon = "info" }),
+        Info = Sections.Main:Tab({ Title = "info", Icon = "info" }),
         Teleport = Sections.Main:Tab({ Title = "Teleport", Icon = "navigation" }),
         Movement = Sections.Main:Tab({ Title = "Movement", Icon = "move" }),
         Visuals = Sections.Main:Tab({ Title = "Visuals", Icon = "eye" }),
@@ -115,7 +115,7 @@ if success then
         })
         
         AccountSection:Button({
-            Title = "رقمك: " .. player.UserId,
+            Title = "id الحساب: " .. player.UserId,
             Callback = function() end
         })
         
@@ -133,7 +133,7 @@ if success then
         })
         
         local killsBtn = PlayerSection:Button({
-            Title = "قتلاك: " .. getRealStat("Kills"),
+            Title = "قتلاتك: " .. getRealStat("Kills"),
             Callback = function() end
         })
 
