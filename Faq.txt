@@ -18,7 +18,7 @@ if success then
 
     -- نافذة البوب أب الترحيبية
     WindUI:Popup({
-        Title = "PhantomPro",
+        Title = "PhantomxxPro",
         Icon = "crown",
         Content = "⚠️ تنبيه هام:\nتشغيل السكربت يكون على مسؤوليتك الشخصية والكاملة، ونحن غير مسؤولين عن أي ضرر. مع أننا نعمل على تقديم سكربت بأعلى معايير الأمان الممكنة، هذا تحذير احترازي في حال حدوث أي مشكلة غير متوقعة.نتمني لكم تجربة ممتعة ❤",
         Buttons = {
@@ -33,10 +33,10 @@ if success then
 
     -- إنشاء النافذة الرئيسية
     local Window = WindUI:CreateWindow({
-        Title = "PhantomPro",
+        Title = "PhantomxxPro",
         Icon = "crown", 
         Author = "Yassin",
-        Folder = "PhantomPro",
+        Folder = "PhantomxxPro",
         Size = UDim2.fromOffset(750, 600),
         Theme = "Dark",
         User = {
@@ -72,7 +72,7 @@ if success then
     }
 
     -- =============================================
--- تبويب المعلومات
+-- تبويب المعلومات  
 -- =============================================
 do
     -- دالة جلب الإحصائيات الحقيقية
@@ -100,7 +100,8 @@ do
     local AccountSection = Tabs.Info:Section({ 
         Title = "حسابك", 
         Opened = true,
-        Spacing = 0
+        Spacing = 0,
+        Padding = 0
     })
     
     AccountSection:Button({
@@ -132,7 +133,8 @@ do
     local PlayerSection = Tabs.Info:Section({ 
         Title = "إحصائياتك", 
         Opened = true,
-        Spacing = 0
+        Spacing = 0,
+        Padding = 0
     })
     
     local winsBtn = PlayerSection:Button({
@@ -149,7 +151,8 @@ do
     local ServerSection = Tabs.Info:Section({ 
         Title = "السيرفر", 
         Opened = true,
-        Spacing = 0
+        Spacing = 0,
+        Padding = 0
     })
     
     local playersBtn = ServerSection:Button({
@@ -1814,4 +1817,3 @@ else
         Duration = 5
     })
 end
-
