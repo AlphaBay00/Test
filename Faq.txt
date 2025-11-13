@@ -18,7 +18,7 @@ if success then
 
     -- نافذة البوب أب الترحيبية
     WindUI:Popup({
-        Title = "PhantomxxPro",
+        Title = "PhantomXPro",
         Icon = "crown",
         Content = "⚠️ تنبيه هام:\nتشغيل السكربت يكون على مسؤوليتك الشخصية والكاملة، ونحن غير مسؤولين عن أي ضرر. مع أننا نعمل على تقديم سكربت بأعلى معايير الأمان الممكنة، هذا تحذير احترازي في حال حدوث أي مشكلة غير متوقعة.نتمني لكم تجربة ممتعة ❤",
         Buttons = {
@@ -33,10 +33,10 @@ if success then
 
     -- إنشاء النافذة الرئيسية
     local Window = WindUI:CreateWindow({
-        Title = "PhantomxxPro",
+        Title = "PhantomXPro",
         Icon = "crown", 
         Author = "Yassin",
-        Folder = "PhantomxxPro",
+        Folder = "PhantomXPro",
         Size = UDim2.fromOffset(750, 600),
         Theme = "Dark",
         User = {
@@ -96,77 +96,62 @@ do
         return "0"
     end
 
-    -- قسم الحساب
-    local AccountSection = Tabs.Info:Section({ 
-        Title = "حسابك", 
-        Opened = true,
-        Spacing = 0,
-        Padding = 0
-    })
-    
-    AccountSection:Button({
-        Title = "الهاك: " .. (identifyexecutor and identifyexecutor() or "ساينابس"),
+    -- معلومات الحساب
+    Tabs.Info:Button({
+        Title = "👤 اسمك: " .. player.DisplayName,
         Callback = function() end
     })
     
-    AccountSection:Button({
-        Title = "اسمك: " .. player.DisplayName,
+    Tabs.Info:Button({
+        Title = "🔰 يوزرك: " .. player.Name,
         Callback = function() end
     })
     
-    AccountSection:Button({
-        Title = "يوزرك: " .. player.Name,
+    Tabs.Info:Button({
+        Title = "🆔 رقمك: " .. player.UserId,
         Callback = function() end
     })
     
-    AccountSection:Button({
-        Title = "الحساب: id" .. player.UserId,
+    Tabs.Info:Button({
+        Title = "📅 عمر الحساب: " .. player.AccountAge .. " يوم",
         Callback = function() end
     })
     
-    AccountSection:Button({
-        Title = "عمر الحساب: " .. player.AccountAge .. " يوم",
+    Tabs.Info:Button({
+        Title = "⚡ الهاك: " .. (identifyexecutor and identifyexecutor() or "ساينابس"),
         Callback = function() end
     })
 
-    -- قسم الإحصائيات
-    local PlayerSection = Tabs.Info:Section({ 
-        Title = "إحصائياتك", 
-        Opened = true,
-        Spacing = 0,
-        Padding = 0
-    })
-    
-    local winsBtn = PlayerSection:Button({
-        Title = "فوزاتك: " .. getRealStat("Wins"),
+    -- خط فاصل بسيط
+    Tabs.Info:Divider({Title = ""})
+
+    -- الإحصائيات
+    local winsBtn = Tabs.Info:Button({
+        Title = "🏆 فوزاتك: " .. getRealStat("Wins"),
         Callback = function() end
     })
     
-    local killsBtn = PlayerSection:Button({
-        Title = "قتلاتك: " .. getRealStat("Kills"),
+    local killsBtn = Tabs.Info:Button({
+        Title = "⚔️ قتلاتك: " .. getRealStat("Kills"),
         Callback = function() end
     })
 
-    -- قسم السيرفر
-    local ServerSection = Tabs.Info:Section({ 
-        Title = "السيرفر", 
-        Opened = true,
-        Spacing = 0,
-        Padding = 0
-    })
-    
-    local playersBtn = ServerSection:Button({
-        Title = "اللاعبين: " .. #Players:GetPlayers(),
+    -- خط فاصل بسيط
+    Tabs.Info:Divider({Title = ""})
+
+    -- معلومات السيرفر
+    local playersBtn = Tabs.Info:Button({
+        Title = "👥 اللاعبين: " .. #Players:GetPlayers(),
         Callback = function() end
     })
     
-    local fpsBtn = ServerSection:Button({
-        Title = "فريماتك: يحسب...",
+    local fpsBtn = Tabs.Info:Button({
+        Title = "📊 فريماتك: يحسب...",
         Callback = function() end
     })
     
-    local pingBtn = ServerSection:Button({
-        Title = "البينق: يحسب...",
+    local pingBtn = Tabs.Info:Button({
+        Title = "📡 البينق: يحسب...",
         Callback = function() end
     })
 
@@ -174,13 +159,13 @@ do
     spawn(function()
         while true do
             wait(3)
-            winsBtn:SetTitle("فوزاتك: " .. getRealStat("Wins"))
-            killsBtn:SetTitle("قتلاك: " .. getRealStat("Kills"))
-            playersBtn:SetTitle("اللاعبين: " .. #Players:GetPlayers())
+            winsBtn:SetTitle("🏆 فوزاتك: " .. getRealStat("Wins"))
+            killsBtn:SetTitle("⚔️ قتلاتك: " .. getRealStat("Kills"))
+            playersBtn:SetTitle("👥 اللاعبين: " .. #Players:GetPlayers())
             
             pcall(function()
                 local ping = StatsService.Network.ServerStatsItem["Data Ping"]:GetValue()
-                pingBtn:SetTitle("البينق: " .. math.floor(ping) .. " ms")
+                pingBtn:SetTitle("📡 البينق: " .. math.floor(ping) .. " ms")
             end)
         end
     end)
@@ -194,7 +179,7 @@ do
             local fps = math.floor(frameCount / (currentTime - lastTime))
             frameCount = 0
             lastTime = currentTime
-            fpsBtn:SetTitle("فريماتك: " .. fps)
+            fpsBtn:SetTitle("📊 فريماتك: " .. fps)
         end
     end)
 end
