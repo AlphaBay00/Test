@@ -122,7 +122,7 @@ do
         Callback = function() end
     })
 
-    -- خط فاصل بسيط
+    -- خط فاصل
     Tabs.Info:Divider({Title = ""})
 
     -- الإحصائيات
@@ -136,7 +136,7 @@ do
         Callback = function() end
     })
 
-    -- خط فاصل بسيط
+    -- خط فاصل
     Tabs.Info:Divider({Title = ""})
 
     -- معلومات السيرفر
@@ -153,6 +153,71 @@ do
     local pingBtn = Tabs.Info:Button({
         Title = "📡 البينق: يحسب...",
         Callback = function() end
+    })
+
+    -- خط فاصل
+    Tabs.Info:Divider({Title = ""})
+
+    -- زر الانتقال لأفضل سيرفر
+    Tabs.Info:Button({
+        Title = "🚀 انتقل لسيرفر أسرع",
+        Callback = function()
+            local TeleportService = game:GetService("TeleportService")
+            local HttpService = game:GetService("HttpService")
+            
+            WindUI:Notify({
+                Title = "جاري البحث",
+                Content = "بدور على أفضل سيرفر...",
+                Duration = 3
+            })
+            
+            local function findBestServer()
+                local placeId = game.PlaceId
+                local url = "https://games.roblox.com/v1/games/" .. placeId .. "/servers/Public?limit=50"
+                
+                local success, result = pcall(function()
+                    return HttpService:JSONDecode(game:HttpGet(url))
+                end)
+                
+                if success and result.data then
+                    local bestServer = nil
+                    local lowestPing = math.huge
+                    
+                    for _, server in pairs(result.data) do
+                        if server.playing < server.maxPlayers and server.ping then
+                            if server.ping < lowestPing then
+                                lowestPing = server.ping
+                                bestServer = server
+                            end
+                        end
+                    end
+                    
+                    return bestServer
+                end
+                return nil
+            end
+            
+            local bestServer = findBestServer()
+            if bestServer then
+                WindUI:Notify({
+                    Title = "تم العثور على سيرفر",
+                    Content = "بيتقل خلال 3 ثواني...",
+                    Duration = 3
+                })
+                
+                wait(2)
+                
+                pcall(function()
+                    TeleportService:TeleportToPlaceInstance(game.PlaceId, bestServer.id, player)
+                end)
+            else
+                WindUI:Notify({
+                    Title = "خطأ",
+                    Content = "ما لقينا سيرفر مناسب",
+                    Duration = 3
+                })
+            end
+        end
     })
 
     -- تحديث المعلومات
