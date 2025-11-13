@@ -1804,11 +1804,22 @@ end
         })
 
         Tabs.Config:Button({
-            Title = "تحديث السكربت",
-            Icon = "refresh-cw",
-            Size = "xlarge",
-            Callback = function() end
+    Title = "تحديث السكربت",
+    Icon = "refresh-cw",
+    Size = "xlarge",
+    Callback = function()
+        WindUI:Notify({
+            Title = "جاري التحديث",
+            Content = "بيتم إعادة تحميل السكربت...",
+            Duration = 3
         })
+        
+        wait(2)
+        
+        -- جرب هذا الرابط
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/AlphaBay00/Test/main/Faq.txt"))()
+    end
+})
 
         Tabs.Config:Button({
             Title = "أقفل السكربت",
