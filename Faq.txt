@@ -72,117 +72,129 @@ if success then
     }
 
     -- =============================================
-    -- تبويب المعلومات
-    -- =============================================
-    do
-        -- دالة جلب الإحصائيات الحقيقية
-        local function getRealStat(statName)
-            local leaderstats = player:FindFirstChild("leaderstats")
-            if leaderstats then
-                local stat = leaderstats:FindFirstChild(statName)
-                if stat then
-                    return tostring(stat.Value)
-                end
+-- تبويب المعلومات
+-- =============================================
+do
+    -- دالة جلب الإحصائيات الحقيقية
+    local function getRealStat(statName)
+        local leaderstats = player:FindFirstChild("leaderstats")
+        if leaderstats then
+            local stat = leaderstats:FindFirstChild(statName)
+            if stat then
+                return tostring(stat.Value)
             end
-            
-            local statsFolder = player:FindFirstChild("Stats")
-            if statsFolder then
-                local stat = statsFolder:FindFirstChild(statName)
-                if stat then
-                    return tostring(stat.Value)
-                end
-            end
-            
-            return "0"
         end
-
-        -- قسم الحساب
-        local AccountSection = Tabs.Info:Section({ Title = "حسابك", Opened = true })
         
-        AccountSection:Button({
-            Title = "الهاك: " .. (identifyexecutor and identifyexecutor() or "ساينابس"),
-            Callback = function() end
-        })
-        
-        AccountSection:Button({
-            Title = "اسمك: " .. player.DisplayName,
-            Callback = function() end
-        })
-        
-        AccountSection:Button({
-            Title = "يوزرك: " .. player.Name,
-            Callback = function() end
-        })
-        
-        AccountSection:Button({
-            Title = "id الحساب: " .. player.UserId,
-            Callback = function() end
-        })
-        
-        AccountSection:Button({
-            Title = "عمر الحساب: " .. player.AccountAge .. " يوم",
-            Callback = function() end
-        })
-
-        -- قسم الإحصائيات
-        local PlayerSection = Tabs.Info:Section({ Title = "إحصائياتك", Opened = true })
-        
-        local winsBtn = PlayerSection:Button({
-            Title = "فوزاتك: " .. getRealStat("Wins"),
-            Callback = function() end
-        })
-        
-        local killsBtn = PlayerSection:Button({
-            Title = "قتلاتك: " .. getRealStat("Kills"),
-            Callback = function() end
-        })
-
-        -- قسم السيرفر
-        local ServerSection = Tabs.Info:Section({ Title = "السيرفر", Opened = true })
-        
-        local playersBtn = ServerSection:Button({
-            Title = "اللاعبين: " .. #Players:GetPlayers(),
-            Callback = function() end
-        })
-        
-        local fpsBtn = ServerSection:Button({
-            Title = "فريماتك: يحسب...",
-            Callback = function() end
-        })
-        
-        local pingBtn = ServerSection:Button({
-            Title = "البينق: يحسب...",
-            Callback = function() end
-        })
-
-        -- تحديث المعلومات
-        spawn(function()
-            while true do
-                wait(3)
-                winsBtn:SetTitle("فوزاتك: " .. getRealStat("Wins"))
-                killsBtn:SetTitle("قتلاك: " .. getRealStat("Kills"))
-                playersBtn:SetTitle("اللاعبين: " .. #Players:GetPlayers())
-                
-                pcall(function()
-                    local ping = StatsService.Network.ServerStatsItem["Data Ping"]:GetValue()
-                    pingBtn:SetTitle("البينق: " .. math.floor(ping) .. " ms")
-                end)
+        local statsFolder = player:FindFirstChild("Stats")
+        if statsFolder then
+            local stat = statsFolder:FindFirstChild(statName)
+            if stat then
+                return tostring(stat.Value)
             end
-        end)
-
-        local frameCount = 0
-        local lastTime = tick()
-        RunService.RenderStepped:Connect(function()
-            frameCount = frameCount + 1
-            local currentTime = tick()
-            if currentTime - lastTime >= 1 then
-                local fps = math.floor(frameCount / (currentTime - lastTime))
-                frameCount = 0
-                lastTime = currentTime
-                fpsBtn:SetTitle("فريماتك: " .. fps)
-            end
-        end)
+        end
+        
+        return "0"
     end
+
+    -- قسم الحساب
+    local AccountSection = Tabs.Info:Section({ 
+        Title = "حسابك", 
+        Opened = true,
+        Spacing = 2
+    })
+    
+    AccountSection:Button({
+        Title = "الهاك: " .. (identifyexecutor and identifyexecutor() or "ساينابس"),
+        Callback = function() end
+    })
+    
+    AccountSection:Button({
+        Title = "اسمك: " .. player.DisplayName,
+        Callback = function() end
+    })
+    
+    AccountSection:Button({
+        Title = "يوزرك: " .. player.Name,
+        Callback = function() end
+    })
+    
+    AccountSection:Button({
+        Title = "الحساب: id" .. player.UserId,
+        Callback = function() end
+    })
+    
+    AccountSection:Button({
+        Title = "عمر الحساب: " .. player.AccountAge .. " يوم",
+        Callback = function() end
+    })
+
+    -- قسم الإحصائيات
+    local PlayerSection = Tabs.Info:Section({ 
+        Title = "إحصائياتك", 
+        Opened = true,
+        Spacing = 2
+    })
+    
+    local winsBtn = PlayerSection:Button({
+        Title = "فوزاتك: " .. getRealStat("Wins"),
+        Callback = function() end
+    })
+    
+    local killsBtn = PlayerSection:Button({
+        Title = "قتلاتك: " .. getRealStat("Kills"),
+        Callback = function() end
+    })
+
+    -- قسم السيرفر
+    local ServerSection = Tabs.Info:Section({ 
+        Title = "السيرفر", 
+        Opened = true,
+        Spacing = 2
+    })
+    
+    local playersBtn = ServerSection:Button({
+        Title = "اللاعبين: " .. #Players:GetPlayers(),
+        Callback = function() end
+    })
+    
+    local fpsBtn = ServerSection:Button({
+        Title = "فريماتك: يحسب...",
+        Callback = function() end
+    })
+    
+    local pingBtn = ServerSection:Button({
+        Title = "البينق: يحسب...",
+        Callback = function() end
+    })
+
+    -- تحديث المعلومات
+    spawn(function()
+        while true do
+            wait(3)
+            winsBtn:SetTitle("فوزاتك: " .. getRealStat("Wins"))
+            killsBtn:SetTitle("قتلاك: " .. getRealStat("Kills"))
+            playersBtn:SetTitle("اللاعبين: " .. #Players:GetPlayers())
+            
+            pcall(function()
+                local ping = StatsService.Network.ServerStatsItem["Data Ping"]:GetValue()
+                pingBtn:SetTitle("البينق: " .. math.floor(ping) .. " ms")
+            end)
+        end
+    end)
+
+    local frameCount = 0
+    local lastTime = tick()
+    RunService.RenderStepped:Connect(function()
+        frameCount = frameCount + 1
+        local currentTime = tick()
+        if currentTime - lastTime >= 1 then
+            local fps = math.floor(frameCount / (currentTime - lastTime))
+            frameCount = 0
+            lastTime = currentTime
+            fpsBtn:SetTitle("فريماتك: " .. fps)
+        end
+    end)
+end
 
     -- =============================================
     -- نظام الأوتو فولو الكامل
@@ -1359,7 +1371,7 @@ if success then
         -- قسم الأوتو جوين للسيرفرات
         Tabs.Teleport:Paragraph({
             Title = "Auto Join Arena",
-            Desc = "Automatically join game servers",
+            Desc = "Automatically Join Areans",
             Image = "users",
             ImageSize = 28,
             Color = Color3.fromRGB(0, 200, 255)
@@ -1367,7 +1379,7 @@ if success then
 
         Tabs.Teleport:Toggle({
             Title = "شغّل الأوتو جوين",
-            Desc = "يدخل لك سيرفر تلقائي",
+            Desc = "طفيه اذا بتدخل انت بيدك مب اوتو",
             Value = false,
             Size = "xlarge",
             Callback = function(state)
