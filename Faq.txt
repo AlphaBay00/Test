@@ -158,6 +158,32 @@ do
     -- خط فاصل
     Tabs.Info:Divider({Title = ""})
 
+    -- زر Rejoin
+    Tabs.Info:Button({
+        Title = "🔄 Rejoin السيرفر",
+        Callback = function()
+            local TeleportService = game:GetService("TeleportService")
+            local currentServerId = game.JobId
+            
+            WindUI:Notify({
+                Title = "جاري إعادة الدخول",
+                Content = "بيخرجك ويدخلك نفس السيرفر...",
+                Duration = 3
+            })
+            
+            wait(1)
+            
+            -- نحفظ معلومات السيرفر الحالي
+            local placeId = game.PlaceId
+            local jobId = game.JobId
+            
+            -- ننتقل لنفس السيرفر
+            pcall(function()
+                TeleportService:TeleportToPlaceInstance(placeId, jobId, player)
+            end)
+        end
+    })
+
     -- زر البحث عن أفضل سيرفر
     Tabs.Info:Button({
         Title = "🚀 ابحث عن سيرفر سريع",
@@ -167,153 +193,57 @@ do
             
             WindUI:Notify({
                 Title = "جاري البحث",
-                Content = "بدور في 500 سيرفر...",
-                Duration = 8
+                Content = "بدور على سيرفر...",
+                Duration = 5
             })
             
-            local function findBestServers()
+            -- طريقة بسيطة وموثوقة
+            local function teleportToRandomServer()
                 local placeId = game.PlaceId
-                local allServers = {}
                 
-                -- ندور في 500 سيرفر (5 صفحات × 100 سيرفر)
-                for page = 0, 4 do
-                    local url = "https://games.roblox.com/v1/games/" .. placeId .. "/servers/Public?limit=100&sortOrder=Desc&cursor=" .. tostring(page)
-                    
-                    local success, result = pcall(function()
-                        return HttpService:JSONDecode(game:HttpGet(url))
-                    end)
-                    
-                    if success and result.data then
-                        for _, server in pairs(result.data) do
-                            -- أهم شي البينق الحلو، المليان عادي
-                            if server.ping and server.ping < 80 and  -- بينق ممتاز
-                               server.playing and server.playing < server.maxPlayers - 2 then  -- فيه مكان لشخصين على الأقل
-                               
-                                table.insert(allServers, {
-                                    id = server.id,
-                                    ping = server.ping,
-                                    playing = server.playing,
-                                    maxPlayers = server.maxPlayers,
-                                    fps = server.fps or 60
-                                })
-                            end
-                        end
-                    end
-                    wait(0.5) -- عشان ما نحظر
-                end
+                pcall(function()
+                    -- نجرب ننتقل لأي سيرفر عشوائي
+                    TeleportService:Teleport(placeId, player)
+                end)
+            end
+            
+            -- نحاول نبحث أول
+            local function tryFindServer()
+                local placeId = game.PlaceId
+                local url = "https://games.roblox.com/v1/games/" .. placeId .. "/servers/Public?limit=10"
                 
-                -- نرتب السيرفرات من الأفضل للأقل
-                -- الأولوية للبينق المنخفض ثم عدد اللاعبين
-                table.sort(allServers, function(a, b)
-                    local scoreA = a.ping + (a.playing * 0.5)  -- البينق أهم
-                    local scoreB = b.ping + (b.playing * 0.5)
-                    return scoreA < scoreB
+                local success, result = pcall(function()
+                    local response = game:HttpGet(url)
+                    return HttpService:JSONDecode(response)
                 end)
                 
-                return allServers
-            end
-            
-            local bestServers = findBestServers()
-            
-            if #bestServers > 0 then
-                local topServers = {}
-                -- نجيب أفضل 3 سيرفرات عشان المستخدم يختار
-                for i = 1, math.min(3, #bestServers) do
-                    table.insert(topServers, bestServers[i])
-                end
-                
-                -- نعرض أفضل السيرفرات للمستخدم
-                local serverOptions = {}
-                for i, server in ipairs(topServers) do
-                    table.insert(serverOptions, {
-                        Title = "سيرفر " .. i .. " | بينق: " .. server.ping .. "ms | لاعبين: " .. server.playing .. "/" .. server.maxPlayers,
-                        Desc = "انقر للانتقال لهذا السيرفر",
-                        ServerData = server
-                    })
-                end
-                
-                WindUI:Popup({
-                    Title = "🎯 وجدنا " .. #bestServers .. " سيرفر ممتاز!",
-                    Content = "اختار السيرفر اللي يعجبك:",
-                    Buttons = {
-                        {
-                            Title = "🔄 بحث مرة ثانية",
-                            Icon = "refresh-cw",
-                            Variant = "Secondary",
-                            Callback = function()
-                                -- ممكن تضيف بحث ثاني هنا
-                            end
-                        },
-                        {
-                            Title = "❌ إلغاء",
-                            Icon = "x",
-                            Variant = "Secondary", 
-                            Callback = function() end
-                        }
-                    }
-                })
-                
-                -- نعرض السيرفرات كأزرار منفصلة
-                for i, option in ipairs(serverOptions) do
-                    Tabs.Info:Button({
-                        Title = option.Title,
-                        Callback = function()
-                            WindUI:Popup({
-                                Title = "🚀 تأكيد الانتقال",
-                                Content = "معلومات السيرفر:\n" ..
-                                         "• البينق: " .. option.ServerData.ping .. " ms\n" ..
-                                         "• اللاعبين: " .. option.ServerData.playing .. "/" .. option.ServerData.maxPlayers .. "\n\n" ..
-                                         "هل تريد الانتقال لهذا السيرفر؟",
-                                Buttons = {
-                                    {
-                                        Title = "✅ نعم، انتقل الآن",
-                                        Icon = "check",
-                                        Variant = "Primary",
-                                        Callback = function()
-                                            WindUI:Notify({
-                                                Title = "جاري الانتقال",
-                                                Content = "بيتقل خلال 3 ثواني...",
-                                                Duration = 3
-                                            })
-                                            
-                                            wait(2)
-                                            
-                                            pcall(function()
-                                                TeleportService:TeleportToPlaceInstance(game.PlaceId, option.ServerData.id, player)
-                                            end)
-                                        end
-                                    },
-                                    {
-                                        Title = "❌ لا، شكراً",
-                                        Icon = "x",
-                                        Callback = function() end
-                                    }
-                                }
+                if success and result and result.data then
+                    for _, server in pairs(result.data) do
+                        if server.id and server.playing < server.maxPlayers then
+                            WindUI:Notify({
+                                Title = "وجدنا سيرفر!",
+                                Content = "بيتقل الآن...",
+                                Duration = 3
                             })
+                            
+                            wait(1)
+                            TeleportService:TeleportToPlaceInstance(placeId, server.id, player)
+                            return
                         end
-                    })
+                    end
                 end
                 
-            else
-                WindUI:Popup({
-                    Title = "🔴 ما لقينا سيرفرات",
-                    Content = "جرب مرة ثانية بعد دقائق\nأو غير وقت اللعب",
-                    Buttons = {
-                        {
-                            Title = "حاول مرة ثانية",
-                            Icon = "refresh-cw",
-                            Callback = function()
-                                -- إعادة البحث
-                            end
-                        },
-                        {
-                            Title = "خلاص",
-                            Icon = "x",
-                            Callback = function() end
-                        }
-                    }
+                -- إذا ما لقينا، نستخدم الطريقة العشوائية
+                WindUI:Notify({
+                    Title = "ما لقينا",
+                    Content = "بننتقل عشوائياً...",
+                    Duration = 3
                 })
+                wait(2)
+                teleportToRandomServer()
             end
+            
+            tryFindServer()
         end
     })
 
