@@ -33,10 +33,10 @@ if success then
 
     -- إنشاء النافذة الرئيسية
     local Window = WindUI:CreateWindow({
-        Title = "PhantomXPro",
+        Title = "PhantomPro",
         Icon = "crown", 
         Author = "Yassin",
-        Folder = "PhantomXPro",
+        Folder = "PhantomPro",
         Size = UDim2.fromOffset(750, 600),
         Theme = "Dark",
         User = {
@@ -100,7 +100,7 @@ do
     local AccountSection = Tabs.Info:Section({ 
         Title = "حسابك", 
         Opened = true,
-        Spacing = 2
+        Spacing = 0
     })
     
     AccountSection:Button({
@@ -132,7 +132,7 @@ do
     local PlayerSection = Tabs.Info:Section({ 
         Title = "إحصائياتك", 
         Opened = true,
-        Spacing = 2
+        Spacing = 0
     })
     
     local winsBtn = PlayerSection:Button({
@@ -149,7 +149,7 @@ do
     local ServerSection = Tabs.Info:Section({ 
         Title = "السيرفر", 
         Opened = true,
-        Spacing = 2
+        Spacing = 0
     })
     
     local playersBtn = ServerSection:Button({
