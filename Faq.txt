@@ -35,7 +35,7 @@ if success then
     local Window = WindUI:CreateWindow({
         Title = "PhantomXPro",
         Icon = "crown", 
-        Author = "Yassin",
+        Author = "Cypher",
         Folder = "PhantomXPro",
         Size = UDim2.fromOffset(750, 600),
         Theme = "Dark",
@@ -103,12 +103,12 @@ do
     })
     
     Tabs.Info:Button({
-        Title = "🔰 يوزرك: " .. player.Name,
+        Title = "🎫 يوزرك: " .. player.Name,
         Callback = function() end
     })
     
     Tabs.Info:Button({
-        Title = "🆔 رقمك: " .. player.UserId,
+        Title = "حسابك:id" .. player.UserId,
         Callback = function() end
     })
     
@@ -160,7 +160,7 @@ do
 
     -- زر Rejoin
     Tabs.Info:Button({
-        Title = "🔄 Rejoin السيرفر",
+        Title = "ادخل نفس سيرفرك الحالي: Rejoin",
         Callback = function()
             local TeleportService = game:GetService("TeleportService")
             local currentServerId = game.JobId
@@ -1540,7 +1540,7 @@ end
         })
 
         Tabs.Teleport:Button({
-            Title = "اروح للمكان المحفوظ",
+            Title = "رح للمكان المحفوظ",
             Icon = "send",
             Size = "xlarge",
             Callback = function()
@@ -1551,7 +1551,7 @@ end
         })
 
         Tabs.Teleport:Button({
-            Title = "اطير فوق الخريطة",
+            Title = "رح فوق الخريطة",
             Icon = "arrow-up",
             Size = "xlarge",
             Callback = function()
@@ -1597,7 +1597,7 @@ end
         })
 
         Tabs.Movement:Toggle({
-            Title = "شغّل السرعة السريعة",
+            Title = "تشغيل السرعة ",
             Desc = "يزيد سرعة حركتك في اللعبة",
             Value = false,
             Size = "xlarge",
@@ -1627,8 +1627,8 @@ end
         })
 
         Tabs.Movement:Toggle({
-            Title = "الطيران المتقدم",
-            Desc = "بيخليك تطير بحرية في الجو",
+            Title = "طيران ",
+            Desc = "بتطير و بيظهر لكل اذا في قيم",
             Value = false,
             Size = "xlarge",
             Callback = function(state)
@@ -1643,7 +1643,7 @@ end
         })
 
         Tabs.Movement:Input({
-            Title = "سرعة الطيران (1-200)",
+            Title = "(200-50) الطيران",
             Value = "50",
             Size = "xlarge",
             Callback = function(value)
@@ -1668,7 +1668,7 @@ end
         Tabs.Movement:Divider()
 
         Tabs.Movement:Toggle({
-            Title = "اظهر زر الأوتو",
+            Title = "تشغيل الأوتو",
             Desc = "بيظهر زر الأوتو على الشاشة",
             Value = false,
             Size = "xlarge",
@@ -1691,7 +1691,7 @@ end
 
         Tabs.Movement:Paragraph({
             Title = "📝 ملاحظات مهمة",
-            Desc = "• لا تشغل الأوتو وأنت مفعل السرعة العالية\n• الأوتو يشتغل فقط عندما تملك القنبلة\n• إذا علق جرب تقفل وتفتح الأوتو مرة ثانية",
+            Desc = "• لا تشغل الأوتو وأنت مفعل السرعة العالية • الأوتو يشتغل فقط عندما تملك القنبلة • إذا علق جرب تقفل وتفتح الأوتو مرة ثانية • إذا ضيعت الزر اضغط على زرار "إرجاع" والزر بيرجعلك",
             Image = "info",
             ImageSize = 28,
             Color = Color3.fromRGB(255, 165, 0)
@@ -1843,7 +1843,7 @@ end
     -- =============================================
     do
         Tabs.Credits:Paragraph({
-            Title = "Yassin",
+            Title = "Cypher",
             Desc = "Roblox Script Developer",
             Image = "user",
             ImageSize = 80,
@@ -1855,7 +1855,7 @@ end
             Icon = "message-circle",
             Size = "xlarge",
             Callback = function()
-                setclipboard("https://discord.gg/vJFPB9M2fX")
+                setclipboard("https://discord.gg/Mvf8PahjRQ")
             end
         })
 
@@ -1871,7 +1871,7 @@ end
             Icon = "mail",
             Size = "xlarge",
             Callback = function()
-                setclipboard("xxyassinxx.")
+                setclipboard("cyph3rone")
             end
         })
     end
@@ -1893,7 +1893,7 @@ end
     -- إشعار الترحيب فقط
     task.wait(2)
     WindUI:Notify({
-        Title = "أهلاً وسهلاً في PhantomX Pro 🌟",
+        Title = "أهلاً وسهلاً في PhantomXPro 🌟",
         Content = "السكربت شغّال وجاهز للاستخدام!\nتمتع بمميزاتنا الحصرية 🚀",
         Duration = 6
     })
