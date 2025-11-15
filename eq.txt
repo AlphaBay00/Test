@@ -1,32 +1,26 @@
--- تأكد من تحميل اللعبة أولاً
-repeat task.wait() until game:IsLoaded()
-task.wait(3) -- وقت إضافي للتأكد
+-- -- الطريقة الجديدة الأكثر استقراراً
+task.wait(5)
 
-local success, result = pcall(function()
-    return loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
-end)
+local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
 
-if success then
-    local WindUI = result
-    
-    -- انتظر حتى اللاعب يظهر
+if WindUI then
     local Players = game:GetService("Players")
-    local player = Players.LocalPlayer
-    
-    while not player or not player.Character do
-        task.wait(1)
-        player = Players.LocalPlayer
-    end
-
     local RunService = game:GetService("RunService")
     local Lighting = game:GetService("Lighting")
     local TweenService = game:GetService("TweenService")
     local UserInputService = game:GetService("UserInputService")
     local StatsService = game:GetService("Stats")
+    local player = Players.LocalPlayer
+
+    -- انتظر حتى يكون اللاعب جاهز
+    while not player or not player.Character do
+        task.wait(1)
+        player = Players.LocalPlayer
+    end
 
     WindUI.TransparencyValue = 0.25
     WindUI:SetTheme("Dark")
-    
+     
     -- نافذة البوب أب الترحيبية
     WindUI:Popup({
         Title = "PhantomXPro",
