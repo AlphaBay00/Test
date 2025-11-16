@@ -1,4 +1,4 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
+
 local success = true
 local result = WindUI
 
@@ -1904,3 +1904,4 @@ else
     })
 
 end
+
