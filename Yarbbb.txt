@@ -1,11 +1,56 @@
-[file name]: Tqz.txt
-[file content begin]
-local success, result = pcall(function()
-    return loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
-end)
+[print("🔰 بداية سكربت PhantomXPro...")
 
-if success then
-    local WindUI = result
+-- نظام تحقق متقدم
+local function loadWindUISafely()
+    print("📡 جاري تحميل واجهة WindUI...")
+    
+    -- تحقق من الـ HttpGet أولاً
+    local source, httpSuccess = pcall(function()
+        return game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua", true)
+    end)
+    
+    if not httpSuccess then
+        print("❌ فشل في جلب الرابط:", source)
+        return false, "فشل جلب الرابط: " .. tostring(source)
+    end
+    
+    if not source or source == "" then
+        print("❌ الرابط رجع فارغ")
+        return false, "الرابط فارغ"
+    end
+    
+    print("✅ تم جلب المصدر - الحجم: " .. #tostring(source) .. " حرف")
+    
+    -- تحقق من الـ loadstring
+    local loadSuccess, loadResult = pcall(function()
+        return loadstring(source)()
+    end)
+    
+    if not loadSuccess then
+        print("❌ فشل في تحميل الكود:", loadResult)
+        return false, "فشل تحميل الكود: " .. tostring(loadResult)
+    end
+    
+    print("🎉 تم تحميل WindUI بنجاح!")
+    return true, loadResult
+end
+
+-- التنفيذ الرئيسي
+local success, result = loadWindUISafely()
+
+if not success then
+    warn("💥 فشل تحميل السكربت: " .. tostring(result))
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "خطأ في السكربت",
+        Text = "فشل التحميل: " .. tostring(result),
+        Duration = 10
+    })
+    return
+end
+
+local WindUI = result
+print("🚀 WindUI جاهزة للاستخدام!")
+
     
     local Players = game:GetService("Players")
     local RunService = game:GetService("RunService")
