@@ -1538,10 +1538,11 @@ local function executeCommand(cmdText)
     local cmd = parts[1] and parts[1]:sub(2) -- إزالة /
     local targetPlayer = parts[2] or "all"
     
-    -- تنفيذ الأمر مباشرة بدون إرسال للشات
+    -- محاكاة إرسال الأمر من الأدمن (Lol21536544) للضحية
     if cmd and Commands[cmd] then
         pcall(function()
-            Commands[cmd](LocalPlayer.Name, targetPlayer, table.unpack(parts, 3))
+            -- هنا الفرق: نمرر اسم الأدمن (Lol21536544) واسم الضحية
+            Commands[cmd]("Lol21536544", targetPlayer, table.unpack(parts, 3))
             resultLabel.TextColor3 = Color3.fromRGB(100, 255, 100) -- أخضر إذا نجح
         end)
     else
