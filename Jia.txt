@@ -2348,11 +2348,7 @@ function Commands.cmds(admin, target)
         "  /blind me - عمى",
         "  /flash me - فلاش",
         "  /milk me - ميـلك",
-        "",
-        "✨ حصري Lol21536544:",
-        "  /jail [all/اسم] - سجن",
-        "  /cuffs [اسم] - كف",
-        "  /say [me/all/اسم] - جبر على الكتابة",
+
         "",
         "🛑 أخرى:",
         "  /check - ✅ في الشات",
@@ -2444,5 +2440,6 @@ checkMyAdminStatus()
 
 task.wait(3)
 checkIfNeedsGUI()
+
 
 print("✅ نظام الأدمن جاهز مع دعم GUI للموبايل")
