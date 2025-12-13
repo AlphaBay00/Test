@@ -2116,4 +2116,4 @@ reapplyPersistent()
 task.wait(2)
 checkMyAdminStatus()
 
-peint("Done") 
+print("Done") 
